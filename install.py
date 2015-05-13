@@ -40,7 +40,7 @@ if __name__ == '__main__':
     link(os.path.join('dotfiles', f), '.' + f.replace('.rc', ''))
 
   # link emacs
-  link('emacs.d', '.emacs.d')
+  link('spacemacs', '.emacs.d')
 
   # link vim
   link('Vundle.vim', '.vim/bundle/Vundle.vim')
