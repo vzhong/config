@@ -43,7 +43,7 @@ if __name__ == '__main__':
   link('spacemacs', '.emacs.d')
 
   # link vim
-  link('Vundle.vim', '.vim/bundle/Vundle.vim')
+  link('vim', '.vim')
 
   # link sublime
   if sys.platform == 'darwin':
