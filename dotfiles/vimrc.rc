@@ -11,6 +11,7 @@ filetype plugin indent on
 syntax on
 
 set nowrap        " don't wrap lines
+set expandtab     " always use spaces instead of tabs
 set tabstop=4     " a tab is four spaces
 set backspace=indent,eol,start
                     " allow backspacing over everything in insert mode
