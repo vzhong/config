@@ -50,7 +50,7 @@ if __name__ == '__main__':
     link('sublime', "Library/Application Support/Sublime Text 3/Packages/User")
   else:
     if os.path.isdir(os.path.join(home_dir, '.config/sublime-text-3')):
-    link('sublime', '.config/sublime-text-3/Packages/User')
+      link('sublime', '.config/sublime-text-3/Packages/User')
 
   # link tmux
   link('tmux', '.tmux.d')
