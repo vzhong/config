@@ -7,3 +7,7 @@
 	clean = git lfs clean %f
 	smudge = git lfs smudge %f
 	required = true
+[alias]
+	ignore = update-index --assume-unchanged
+	unignore = update-index --no-assume-unchanged
+	ignored = !git ls-files -v | grep "^[[:lower:]]"
