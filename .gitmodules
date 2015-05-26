@@ -7,3 +7,9 @@
 [submodule "tomorrow-theme"]
 	path = tomorrow-theme
 	url = https://github.com/chriskempson/tomorrow-theme.git
+[submodule "vim/bundle/python-mode"]
+	path = vim/bundle/python-mode
+	url = git://github.com/klen/python-mode.git
+[submodule "vim/bundle/colorschemes"]
+	path = vim/bundle/colorschemes
+	url = https://github.com/flazz/vim-colorschemes.git

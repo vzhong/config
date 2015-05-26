@@ -43,14 +43,14 @@ if __name__ == '__main__':
   link('spacemacs', '.emacs.d')
 
   # link vim
-  link('Vundle.vim', '.vim/bundle/Vundle.vim')
+  link('vim', '.vim')
 
   # link sublime
   if sys.platform == 'darwin':
-  	link('sublime', "Library/Application Support/Sublime Text 3/Packages/User")
+    link('sublime', "Library/Application Support/Sublime Text 3/Packages/User")
   else:
     if os.path.isdir(os.path.join(home_dir, '.config/sublime-text-3')):
-  	  link('sublime', '.config/sublime-text-3/Packages/User')
+    link('sublime', '.config/sublime-text-3/Packages/User')
 
   # link tmux
   link('tmux', '.tmux.d')
