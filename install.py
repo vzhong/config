@@ -39,6 +39,9 @@ if __name__ == '__main__':
   for f in [f for f in os.listdir(dot_files_dir) if f.endswith('.rc')]:
     link(os.path.join('dotfiles', f), '.' + f.replace('.rc', ''))
 
+  # link global git ignore
+  link('git/gitignore', '.gitignore')
+
   # link emacs
   link('spacemacs', '.emacs.d')
 

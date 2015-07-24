@@ -19,7 +19,7 @@ if [ -d $TORCH_ROOT ]; then
     export LD_LIBRARY_PATH=${TORCH_ROOT}/install/lib:$LD_LIBRARY_PATH
 fi
 
-export PATH=/usr/local/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 LOCAL=~/local
 
 if [ -d $LOCAL ]; then
