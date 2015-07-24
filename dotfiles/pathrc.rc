@@ -1,5 +1,18 @@
 #!/usr/bin/env sh
 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+export PATH=/usr/local/bin:$PATH
+LOCAL=~/local
+
+if [ -d $LOCAL ]; then
+    export PATH=${LOCAL}/bin:$PATH
+    export LD_LIBRARY_PATH=${LOCAL}/lib:$LD_LIBRARY_PATH
+fi
+
+export VICTOR_ROOT=${HOME}/.victor
+export PATH=${VICTOR_ROOT}/bin:$PATH
+export LD_LIBRARY_PATH=${VICTOR_ROOT}/lib:$LD_LIBRARY_PATH
+
 if [ -d $CONDA_ROOT ]; then
     export PATH=${CONDA_ROOT}/bin:$PATH
     export LD_LIBRARY_PATH=${CONDA_ROOT}/lib:$LD_LIBRARY_PATH
@@ -31,4 +44,4 @@ export VICTOR_ROOT=${HOME}/.victor
 export PATH=${VICTOR_ROOT}/bin:$PATH
 export LD_LIBRARY_PATH=${VICTOR_ROOT}/lib:$LD_LIBRARY_PATH
 
-export EDITOR=e 
+export EDITOR=vim
