@@ -1,12 +1,5 @@
 # Manual setup
 
-### Homebrew
-
-```bash
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-
-
 ### Sublime Text package control
 
 ```python

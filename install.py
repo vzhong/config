@@ -42,9 +42,6 @@ if __name__ == '__main__':
   # link global git ignore
   link('git/gitignore', '.gitignore')
 
-  # link emacs
-  link('spacemacs', '.emacs.d')
-
   # link vim
   link('vim', '.vim')
 

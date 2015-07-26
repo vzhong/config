@@ -1,15 +1,48 @@
 #!/usr/bin/env bash
 set -x
+set -e
 
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install"
+# homebrew
+echo "getting homebrew"
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+# xcode
+echo "setting up xcode"
+xcode-select --install
+
+# python
+echo "setting up python"
+brew tap homebrew/python
+brew install python numpy scipy matplotlib theano ipython theano docopt
+
+# shell
+echo "setting up shell environment"
+brew install zsh tmux mosh
+brew install macvim --override-system-vim
+chsh -s $(which zsh)
+source ~/.zshrc
+echo "-- you should run :BundleInstall to finish setting up vim"
+
+# git
+echo "setting up git repo"
 git clone --recursive git@github.com:vzhong/config ~/config
 cd ~/config
 python install.py
-source ~/.zshrc
 
-brew tap homebrew/python
-brew install zsh python numpy scipy matplotlib mosh caskroom/cask/brew-cask
-brew cask install google-chrome dropbox flux gog-galaxy google-drive hazel dayone-cli evernote mailbox basictex
+# ruby
+echo "setting up ruby"
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+\curl -sSL https://get.rvm.io | bash -s stable --ruby
+gem install bropages
 
-pip install ipython theano
+# java
+echo "setting up java"
+brew install java
+
+# brew cask
+echo "setting up additional software via cask"
+brew install caskroom/cask/brew-cask
+brew cask install iterm pycharm-ultimate intellij-ultimate spotify dropbox mailbox 
+brew cask install google-drive google-chrome google-hangout flux evernote atom sunrise postgres
+echo "you should install 1password manually"
+
