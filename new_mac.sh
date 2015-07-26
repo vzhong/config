@@ -45,6 +45,6 @@ brew cask install java
 echo "setting up additional software via cask"
 brew install caskroom/cask/brew-cask
 brew cask install iterm pycharm intellij-idea spotify dropbox mailbox 
-brew cask install google-drive google-chrome google-hangout flux evernote atom sunrise postgres
+brew cask install google-drive google-chrome google-hangouts flux evernote atom sunrise postgres
 echo "you should install 1password manually"
 
