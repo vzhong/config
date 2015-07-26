@@ -1,26 +1,25 @@
 #!/usr/bin/env bash
 set -x
-set -e
 
 # homebrew
 echo "getting homebrew"
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-# xcode
-echo "setting up xcode"
-xcode-select --install
+# xcode echo "setting up xcode" xcode-select --install
 
 # python
 echo "setting up python"
 brew tap homebrew/python
 brew install python numpy scipy matplotlib 
-pip install theano ipython theano docopt
+pip install ipython theano docopt
 
 # shell
 echo "setting up shell environment"
-brew install zsh tmux mosh
+brew install zsh tmux mosh cmake
 brew install macvim --override-system-vim
 chsh -s $(which zsh)
+mkdir -p ~/.vim/bundle/
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/vundle
+git clone https://github.com/tarjoilija/zgen.git
 source ~/.zshrc
 echo "-- you should run :BundleInstall to finish setting up vim"
 
@@ -43,8 +42,9 @@ brew cask install java
 
 # brew cask
 echo "setting up additional software via cask"
+brew install seil
 brew install caskroom/cask/brew-cask
-brew cask install iterm pycharm intellij-idea spotify dropbox mailbox 
+brew cask install iterm2 pycharm intellij-idea spotify dropbox mailbox 
 brew cask install google-drive google-chrome google-hangouts flux evernote atom postgres
 echo "you should install 1password manually"
 
