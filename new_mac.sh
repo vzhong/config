@@ -20,7 +20,7 @@ chsh -s $(which zsh)
 mkdir -p ~/.vim/bundle/
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/vundle
 git clone https://github.com/tarjoilija/zgen.git
-source ~/.zshrc
+# source ~/.zshrc
 echo "-- you should run :BundleInstall to finish setting up vim"
 
 # git
