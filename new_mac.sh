@@ -36,15 +36,13 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 \curl -sSL https://get.rvm.io | bash -s stable --ruby
 gem install bropages
 
-# java
-echo "setting up java"
-brew cask install java
-
 # brew cask
 echo "setting up additional software via cask"
-brew install seil
 brew install caskroom/cask/brew-cask
-brew cask install iterm2 pycharm intellij-idea spotify dropbox mailbox 
+brew cask install seil java iterm2 pycharm intellij-idea spotify dropbox mailbox 
 brew cask install google-drive google-chrome google-hangouts flux evernote atom postgres
 echo "you should install 1password manually"
+
+# set up icloud
+ln -s ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/ ~/sync
 

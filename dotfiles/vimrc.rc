@@ -49,7 +49,7 @@ set smartcase
 let mapleader = "\<Space>"
 
 " Open nerdtree by default
-autocmd vimenter * NERDTree
+" autocmd vimenter * NERDTree
 " Close if only nerdtree left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " Map nerdtree hotkey to leader f
