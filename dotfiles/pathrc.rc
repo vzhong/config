@@ -20,7 +20,7 @@ fi
 
 if [ -d $CUDA_ROOT ]; then
     export PATH=${CUDA_ROOT}/bin:$PATH
-    export LD_LIBRARY_PATH=${CUDA_ROOT}/lib:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=${CUDA_ROOT}/lib64:$LD_LIBRARY_PATH
 fi
 
 if [ -d $CAFFE_ROOT ]; then
