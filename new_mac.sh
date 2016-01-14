@@ -2,8 +2,10 @@
 set -x
 
 # homebrew
-echo "getting homebrew"
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if ! brew then
+    echo "getting homebrew"
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
 # xcode echo "setting up xcode" xcode-select --install
 
 # python
@@ -15,11 +17,14 @@ pip install ipython theano docopt
 # shell
 echo "setting up shell environment"
 brew install zsh tmux mosh cmake
-brew install macvim --override-system-vim
 chsh -s $(which zsh)
 mkdir -p ~/.vim/bundle/
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/vundle
 git clone https://github.com/tarjoilija/zgen.git
+# necessary repos
+git clone https://github.com/chriskempson/tomorrow-theme.git
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/vundle
+git clone https://github.com/flazz/vim-colorschemes.git ~/.vim/bundle/colorschemes
+
 # source ~/.zshrc
 echo "-- you should run :BundleInstall to finish setting up vim"
 
