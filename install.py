@@ -1,7 +1,6 @@
 #!/usr/bin/env python2
 
 import os
-import sys
 import shutil
 import stat
 
@@ -45,14 +44,7 @@ if __name__ == '__main__':
   # link vim
   link('vim', '.vim')
 
-  # link sublime
-  if sys.platform == 'darwin':
-    link('sublime', "Library/Application Support/Sublime Text 3/Packages/User")
-  else:
-    if os.path.isdir(os.path.join(home_dir, '.config/sublime-text-3')):
-      link('sublime', '.config/sublime-text-3/Packages/User')
-
-  # link tmux
+    # link tmux
   link('tmux', '.tmux.d')
 
   # link my bin files

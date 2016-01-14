@@ -13,6 +13,6 @@ Package Control.*
 *~
 *#
 
-prelude/
 zgen/
 vim/
+libs/
