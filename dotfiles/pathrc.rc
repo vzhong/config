@@ -28,8 +28,7 @@ if [ -d $CAFFE_ROOT ]; then
 fi
 
 if [ -d $TORCH_ROOT ]; then
-    export PATH=${TORCH_ROOT}/install/bin:$PATH
-    export LD_LIBRARY_PATH=${TORCH_ROOT}/install/lib:$LD_LIBRARY_PATH
+    source ${TORCH_ROOT}/install/bin/torch-activate
 fi
 
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
