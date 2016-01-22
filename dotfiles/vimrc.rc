@@ -22,6 +22,7 @@ Bundle 'slim-template/vim-slim'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/nerdtree'
 Bundle 'Xuyuanp/nerdtree-git-plugin'
+Bundle 'klen/python-mode'
 
 colorscheme Tomorrow-Night
 
@@ -78,3 +79,32 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" YouCompleteMe
+" go to definition
+nnoremap <leader>jd :YcmCompleter GoTo<CR>
+let g:ycm_goto_buffer_command = 'vertical-split'
+" seed with syntax files
+let g:ycm_seed_identifiers_with_syntax = 1
+" add function information
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<ENTER>']
+
+" Python mode
+let g:syntastic_ignore_files = ['\.py$'] " disable syntastic linting
+let g:pymode_lint = 1
+let g:pymode_lint_message = 1
+let g:pymode_lint_ignore = "E402,E501,E302,E111,E114"
+let g:pymode_lint_on_write = 1
+let g:pymode_options_colorcolumn = 0
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_doc_bind = 'K'
+let g:pymode_folding = 0
+
+" CtrlP
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+
