@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 set -x
 
-mkdir libs
-sudo gem install bundler
-
-git clone git@github.com:ttscoff/Slogger.git libs/slogger
-cd libs/slogger
-bundle install
-cd -
+# don't open photos app when iphone is plugged in
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
