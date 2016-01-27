@@ -6,8 +6,8 @@
 	excludesfile = ~/.gitignore
 	autocrlf = input
 [filter "lfs"]
-	clean = git lfs clean %f
-	smudge = git lfs smudge %f
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
 	required = true
 [alias]
 	ignore = update-index --assume-unchanged
