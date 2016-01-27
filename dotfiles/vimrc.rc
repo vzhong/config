@@ -23,6 +23,7 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/nerdtree'
 Bundle 'Xuyuanp/nerdtree-git-plugin'
 Bundle 'klen/python-mode'
+Bundle 'Olivine-Labs/vim-busted'
 
 colorscheme Tomorrow-Night
 
@@ -108,3 +109,9 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 
+" Busted
+let g:busted_command = "!luarocks make && busted {spec}"
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
