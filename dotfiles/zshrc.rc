@@ -1,6 +1,6 @@
 if [[ $- == *i* ]] 
 then
-  echo "Hello!"
+  echo "Hello ${USER}!"
 else
   exit 0
 fi
