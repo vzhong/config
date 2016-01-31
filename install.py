@@ -26,7 +26,8 @@ def run(cmd, verbose=True):
   p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
   out, err = p.communicate()
   if verbose:
-    logging.info(out)
+    if out.strip():
+      logging.info(out)
     logging.info('time elapsed {}'.format(time() - start))
   if p.returncode:
     raise Exception(err)
@@ -117,10 +118,11 @@ def install_editors():
     brew_install('emacs-mac', tap='railwaycat/homebrew-emacsmacport', options=['--with-spacemacs-icon'])
   else:
     brew_install('emacs')
-  git_clone('git clone https://github.com/syl20bnr/spacemacs', to='emacs.d')
+  git_clone('https://github.com/syl20bnr/spacemacs', to='emacs.d')
+  link('emacs.d', '.emacs.d')
 
   # atom
-  brew_install('atom')
+  run('brew cask install atom')
 
 def install_os_specific():
   if get_os() == 'mac':
@@ -156,7 +158,8 @@ if __name__ == '__main__':
   if not get_executable('rvm'):
     install_rvm()
   # optional fun bropages
-  run('gem install bropages')
+  if not get_executable('bro'):
+    run('gem install bropages')
 
   # shell
   brew_install(['zsh', 'tmux', 'mosh', 'cmake'])
