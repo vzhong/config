@@ -7,6 +7,7 @@ import logging
 import subprocess
 import sys
 from distutils import spawn
+from time import time
 
 def get_os():
   platform = sys.platform.lower()
@@ -20,13 +21,16 @@ def get_os():
 def run(cmd, verbose=True):
   if isinstance(cmd, str):
     cmd = cmd.split(' ')
+  logging.info("{}".format(cmd))
   p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
   out, err = p.communicate()
-  if err:
-      raise Exception(err)
-  logging.info("{}".format(cmd))
   if verbose:
     logging.info(out)
+  if p.returncode:
+    raise Exception(err)
+  else:
+    logging.warn(err)
+  return out
 
 def rm_if_exists(p):
   if os.path.islink(p):
@@ -77,13 +81,24 @@ def brew_install(brews, tap=None, options=()):
   run(['brew', 'install'] + brews + list(options))
 
 def git_clone(repo, to=None, recursive=True):
-  logging('cloning repository {}'.format(repo))
+  logging.info('cloning repository {}'.format(repo))
   cmd = ['git', 'clone', repo]
   if to:
     cmd += [to]
   if recursive:
     cmd += ['--recursive']
-  run(cmd)
+  try:
+    run(cmd)
+  except Exception as e:
+    if 'already exists' in e:
+      logging.critical(str(e))
+    logging.critical('skipping because directory already exists')
+
+def install_rvm():
+  brew_install(['gnupg', 'gnupg2'])
+  run('gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3')
+  rvm = run('curl -sSL https://get.rvm.io', verbose=False)
+  run(['bash', '-s', 'stable', '--ruby', rvm])
 
 def install_editors():
   brew_install('vim')
@@ -123,15 +138,13 @@ if __name__ == '__main__':
   brew_install('python', tap='homebrew/python')
 
   # ruby (RVM)
-  brew_install(['gnupg', 'gnupg2'])
-  run('gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3')
-  run('\curl -sSL https://get.rvm.io | bash -s stable --ruby')
+  if not get_executable('rvm'):
+    install_rvm()
   # optional fun bropages
   run('gem install bropages')
 
-  # change default shell
+  # shell
   brew_install(['zsh', 'tmux', 'mosh', 'cmake'])
-  run(['chsh', '-s', get_executable('zsh')])
 
   # editors
   install_editors()
@@ -166,4 +179,11 @@ if __name__ == '__main__':
   git_clone('git clone https://github.com/syl20bnr/spacemacs', to='~/.emacs.d')
 
   # os specific
-  source('~/.zshrc')
+  logging.info('installing os specific packages')
+  install_os_specific()
+
+  print('you need to change your default shell to zsh:')
+  print('sudo cat "{}" >> /etc/shells'.format(get_executable('zsh')))
+  print('chsh -s {}'.format(get_executable('zsh')))
+  print('finished! you can now run the following to get started')
+  print('source ~/.zshrc')
