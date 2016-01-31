@@ -1,8 +1,0 @@
-{
-  "pep8_ignore":[
-      500
-  ],
-  "auto_complete_triggers": [
-    {"selector": "source.python - string - comment - constant.numeric", "characters": "."}
-  ],
-}

@@ -22,10 +22,12 @@ def run(cmd, verbose=True):
   if isinstance(cmd, str):
     cmd = cmd.split(' ')
   logging.info("{}".format(cmd))
+  start = time()
   p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
   out, err = p.communicate()
   if verbose:
     logging.info(out)
+    logging.info('time elapsed {}'.format(time() - start))
   if p.returncode:
     raise Exception(err)
   else:
@@ -91,8 +93,7 @@ def git_clone(repo, to=None, recursive=True):
     run(cmd)
   except Exception as e:
     if 'already exists' in e:
-      logging.critical(str(e))
-    logging.critical('skipping because directory already exists')
+      logging.critical('skipping because directory already exists')
 
 def install_rvm():
   brew_install(['gnupg', 'gnupg2'])
@@ -101,16 +102,30 @@ def install_rvm():
   run(['bash', '-s', 'stable', '--ruby', rvm])
 
 def install_editors():
+  # vim
   brew_install('vim')
+  link('vim', '.vim')
+  mkdir_if_not_exist('vim/bundle')
+  git_clone('https://github.com/tarjoilija/zgen.git')
+  git_clone('https://github.com/klen/python-mode.git', to='vim/bundle/python-mode')
+  git_clone('https://github.com/chriskempson/tomorrow-theme.git')
+  git_clone('https://github.com/gmarik/Vundle.vim.git', to='vim/bundle/vundle')
+  git_clone('https://github.com/flazz/vim-colorschemes.git', to='vim/bundle/colorschemes')
+
+  # emacs
   if get_os() == 'mac':
     brew_install('emacs-mac', tap='railwaycat/homebrew-emacsmacport', options=['--with-spacemacs-icon'])
   else:
     brew_install('emacs')
+  git_clone('git clone https://github.com/syl20bnr/spacemacs', to='emacs.d')
+
+  # atom
+  brew_install('atom')
 
 def install_os_specific():
   if get_os() == 'mac':
     run('brew install caskroom/cask/brew-cask')
-    run('brew cask install seil java iterm2 flux atom')
+    run('brew cask install seil java iterm2 flux')
     # disable photo app auto startup on connecting ios device
     run('defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true')
 
@@ -145,6 +160,8 @@ if __name__ == '__main__':
 
   # shell
   brew_install(['zsh', 'tmux', 'mosh', 'cmake'])
+  # link tmux
+  link('tmux', '.tmux.d')
 
   # editors
   install_editors()
@@ -157,26 +174,11 @@ if __name__ == '__main__':
   # link global git ignore
   link('git/gitignore', '.gitignore')
 
-  # link vim
-  link('vim', '.vim')
-  mkdir_if_not_exist('~/.vim/bundle')
-
-  # link tmux
-  link('tmux', '.tmux.d')
-
   # link local files
   link('local', '.local')
   temp = os.path.join(home_dir, '.local', 'bin')
   st = os.stat(temp)
   os.chmod(temp, st.st_mode | stat.S_IEXEC)
-
-  # clone repos
-  git_clone('https://github.com/tarjoilija/zgen.git')
-  git_clone('https://github.com/klen/python-mode.git', to='~/.vim/bundle/python-mode')
-  git_clone('https://github.com/chriskempson/tomorrow-theme.git')
-  git_clone('https://github.com/gmarik/Vundle.vim.git', to='~/.vim/bundle/vundle')
-  git_clone('https://github.com/flazz/vim-colorschemes.git', to='~/.vim/bundle/colorschemes')
-  git_clone('git clone https://github.com/syl20bnr/spacemacs', to='~/.emacs.d')
 
   # os specific
   logging.info('installing os specific packages')
@@ -186,4 +188,4 @@ if __name__ == '__main__':
   print('sudo cat "{}" >> /etc/shells'.format(get_executable('zsh')))
   print('chsh -s {}'.format(get_executable('zsh')))
   print('finished! you can now run the following to get started')
-  print('source ~/.zshrc')
+  print('source {}/.zshrc'.format(os.environ['HOME']))

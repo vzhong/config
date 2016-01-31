@@ -1,12 +1,5 @@
 .DS_Store
-Package Control.last-run
-Package Control.ca-list
-Package Control.ca-bundle
-Package Control.system-ca-bundle
-Package Control.cache/
-Package Control.ca-certs/
-Package Control.*
-*.sublime-build
+*.py[cod]
 *-bundle
 *.cache/
 *History
@@ -15,4 +8,5 @@ Package Control.*
 
 zgen/
 vim/
+emacs/
 libs/
