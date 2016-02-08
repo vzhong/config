@@ -9,8 +9,8 @@ if [ -d $LOCAL ]; then
     export LD_LIBRARY_PATH=${LOCAL}/lib:$LD_LIBRARY_PATH
 fi
 
-export VICTOR_ROOT=${HOME}/.victor
-export PATH=${VICTOR_ROOT}/bin:$PATH
+export LOCAL_ROOT=${HOME}/.local
+export PATH=${LOCAL_ROOT}/bin:$PATH
 export LD_LIBRARY_PATH=${VICTOR_ROOT}/lib:$LD_LIBRARY_PATH
 
 if [ -d $CONDA_ROOT ]; then
