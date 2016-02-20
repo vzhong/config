@@ -25,6 +25,10 @@ mcd() {
     cd $@
 }
 
-e() {
-    emacsclient -t $* || (emacs --daemon && emacsclient -t $*)
+mkdoc() {
+    if [ ! -d docs ]; then
+      echo "making directory docs"
+      mkdir docs
+    fi
+    dokx-build-package-docs -o docs .
 }

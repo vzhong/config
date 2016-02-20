@@ -23,6 +23,7 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     python
      auto-completion
      better-defaults
      emacs-lisp
@@ -36,9 +37,9 @@ values."
      syntax-checking
      version-control
      latex
+     semantic
      lua
      osx
-     semantic
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -251,6 +252,7 @@ layers configuration. You are free to put any user code."
   (global-linum-mode)
   (remove-hook 'text-mode-hook #'turn-on-auto-fill)
   (spacemacs/toggle-auto-fill-mode-off)
+  ; (setq python-shell-interpreter "python")
   ; do full preview
   ; (add-hook 'doc-view-mode-hook 'auto-revert-mode)
   )
