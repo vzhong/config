@@ -109,9 +109,5 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_working_path_mode = 'ra'
 
-" Busted
-let g:busted_command = "!luarocks make && busted {spec}"
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+" Compilation
+nnoremap <leader>r:update<Bar>execute '!%:p '.shellescape(@%, 1)<CR>
