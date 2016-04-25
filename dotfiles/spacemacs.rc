@@ -23,6 +23,7 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     python
      auto-completion
      better-defaults
      emacs-lisp
@@ -36,6 +37,7 @@ values."
      syntax-checking
      version-control
      latex
+     semantic
      lua
      osx
      dash
@@ -252,8 +254,13 @@ in `dotspacemacs/user-config'."
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
   (global-linum-mode)
-  (remove-hook 'text-mode-hook #'turn-on-auto-fill)
-  (spacemacs/toggle-auto-fill-mode-off)
+  ;; disable line hard wrap
+  (add-hook 'text-mode-hook 'spacemacs/toggle-auto-fill-mode-off)
+  ;; enable line soft wrap
+  (add-hook 'text-mode-hook 'spacemacs/toggle-truncate-lines-off)
+  ;; Visual line navigation for textual modes
+  (add-hook 'text-mode-hook 'spacemacs/toggle-visual-line-navigation-on)
+  ; (setq python-shell-interpreter "python")
   ; do full preview
   ; (add-hook 'doc-view-mode-hook 'auto-revert-mode)
   )
