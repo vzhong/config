@@ -24,6 +24,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'Xuyuanp/nerdtree-git-plugin'
 Bundle 'klen/python-mode'
 Bundle 'Olivine-Labs/vim-busted'
+Bundle 'tpope/vim-dispatch'
 
 colorscheme Tomorrow-Night
 
@@ -114,4 +115,8 @@ if executable('ag')
 endif
 
 " Compilation
-nnoremap <leader>r:update<Bar>execute '!%:p '.shellescape(@%, 1)<CR>
+autocmd FileType java let b:dispatch = 'javac %'
+autocmd FileType lua let b:dispatch = 'th %'
+nnoremap <leader>r :Dispatch<CR>
+
+

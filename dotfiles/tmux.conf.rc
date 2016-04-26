@@ -41,7 +41,7 @@ bind \ split-window -h
 bind - split-window -v
 
 bind-key    -T prefix w                confirm-before -p "kill-window #W? (y/n)" kill-window
-bind-key    -T prefix p                confirm-before -p "kill-pane #W? (y/n)" kill-pane
+bind-key    -T prefix x                confirm-before -p "kill-pane #W? (y/n)" kill-pane
 
 
 #####################
@@ -53,6 +53,7 @@ bind-key    -T prefix p                confirm-before -p "kill-pane #W? (y/n)" k
 
 # start windows at 1
 set -g base-index 1
+set-window-option -g pane-base-index 1
 
 # large scroll history
 set -g history-limit 30000
