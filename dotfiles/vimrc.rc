@@ -23,8 +23,9 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/nerdtree'
 Bundle 'Xuyuanp/nerdtree-git-plugin'
 Bundle 'klen/python-mode'
-Bundle 'Olivine-Labs/vim-busted'
 Bundle 'tpope/vim-dispatch'
+Bundle 'xolox/vim-misc'
+Bundle 'vzhong/vim-lua-ftplugin'
 
 colorscheme Tomorrow-Night
 
@@ -119,4 +120,7 @@ autocmd FileType java let b:dispatch = 'javac %'
 autocmd FileType lua let b:dispatch = 'th %'
 nnoremap <leader>r :Dispatch<CR>
 
-
+" Lua
+let g:lua_complete_omni = 1
+let g:lua_complete_globals = 0
+let g:lua_complete_dynamic = 0
