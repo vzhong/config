@@ -81,7 +81,7 @@ set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 1
 
 " YouCompleteMe
 " go to definition
@@ -124,3 +124,9 @@ nnoremap <leader>r :Dispatch<CR>
 let g:lua_complete_omni = 1
 let g:lua_complete_globals = 0
 let g:lua_complete_dynamic = 0
+let g:lua_compiler_name = '/Users/victor/torch/install/bin/luajit'
+let g:lua_compiler_args = '-bl'
+
+let g:syntastic_check_on_open = 1
+let g:syntastic_lua_checkers = ["luacheck"]
+let g:syntastic_lua_luacheck_args = "--no-unused-args"
