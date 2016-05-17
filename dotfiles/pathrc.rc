@@ -37,7 +37,6 @@ if [ -d $BREW_ROOT ]; then
   export PATH=${BREW_ROOT}/bin:${BREW_ROOT}/sbin:$PATH
   export MANPATH=${BREW_ROOT}/share/man:$MANPATH
   export INFOPATH=${BREW_ROOT}/share/info:$INFOPATH
-  export LD_LIBRARY_PATH=${BREW_ROOT}:$LD_LIBRARY_PATH
 fi
 
 if [ -d $LOCAL ]; then

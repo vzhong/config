@@ -67,7 +67,7 @@ def link(from_file, to_file, override_to_dir=''):
 def install_homebrew():
   logging.info('installing homebrew')
   curl = {
-      'linux': '"$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/linuxbrew/go/install)"',
+      'linux': '"$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"',
       'mac': '"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"',
   }[get_os()]
   run(['ruby', '-e', curl])
@@ -104,25 +104,25 @@ def install_rvm():
 
 def install_editors():
   # vim
-  brew_install('vim')
+  # brew_install('vim')
   link('vim', '.vim')
   mkdir_if_not_exist('vim/bundle')
   git_clone('https://github.com/tarjoilija/zgen.git')
-  git_clone('https://github.com/klen/python-mode.git', to='vim/bundle/python-mode')
-  git_clone('https://github.com/chriskempson/tomorrow-theme.git')
+  # git_clone('https://github.com/klen/python-mode.git', to='vim/bundle/python-mode')
+  # git_clone('https://github.com/chriskempson/tomorrow-theme.git')
   git_clone('https://github.com/gmarik/Vundle.vim.git', to='vim/bundle/vundle')
-  git_clone('https://github.com/flazz/vim-colorschemes.git', to='vim/bundle/colorschemes')
+  # git_clone('https://github.com/flazz/vim-colorschemes.git', to='vim/bundle/colorschemes')
 
   # emacs
-  if get_os() == 'mac':
-    brew_install('emacs-mac', tap='railwaycat/homebrew-emacsmacport', options=['--with-spacemacs-icon'])
-  else:
-    brew_install('emacs')
-  git_clone('https://github.com/syl20bnr/spacemacs', to='emacs.d')
-  link('emacs.d', '.emacs.d')
+  # if get_os() == 'mac':
+  #   brew_install('emacs-mac', tap='railwaycat/homebrew-emacsmacport', options=['--with-spacemacs-icon'])
+  # else:
+  #   brew_install('emacs')
+  # git_clone('https://github.com/syl20bnr/spacemacs', to='emacs.d')
+  # link('emacs.d', '.emacs.d')
 
   # atom
-  run('brew cask install atom')
+  # run('brew cask install atom')
 
 def install_os_specific():
   if get_os() == 'mac':
@@ -161,7 +161,7 @@ if __name__ == '__main__':
   if not get_executable('bro'):
     run('gem install bropages')
 
-  # shell
+  # # shell
   brew_install(['zsh', 'tmux', 'mosh', 'cmake'])
   # link tmux
   link('tmux', '.tmux.d')

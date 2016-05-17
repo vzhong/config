@@ -121,10 +121,10 @@ autocmd FileType lua let b:dispatch = 'th %'
 nnoremap <leader>r :Dispatch<CR>
 
 " Lua
-let g:lua_complete_omni = 1
+let g:lua_complete_omni = 0
 let g:lua_complete_globals = 0
 let g:lua_complete_dynamic = 0
-let g:lua_compiler_name = '/Users/victor/torch/install/bin/luajit'
+let g:lua_compiler_name = 'luajit'
 let g:lua_compiler_args = '-bl'
 
 let g:syntastic_check_on_open = 1
