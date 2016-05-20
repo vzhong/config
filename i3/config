@@ -67,6 +67,8 @@ exec_always --no-startup-id light-locker
 # Google music
 exec google-play-music-desktop-player
 
+# 1password
+exec_always --no-startup-id 1pass
 
 
 

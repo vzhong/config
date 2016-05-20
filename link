@@ -30,3 +30,6 @@ if __name__ == '__main__':
 
   print('linking vim snippets')
   link(os.path.join(mydir, 'snippets'), os.path.join(home_dir, '.vim', 'snippets'))
+
+  print('linking 1password')
+  link(os.path.join(home_dir, 'Dropbox', 'Apps', '1Password'), os.path.join(home_dir, '1Password'))
