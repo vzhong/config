@@ -22,12 +22,10 @@ Bundle 'slim-template/vim-slim'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/nerdtree'
 Bundle 'Xuyuanp/nerdtree-git-plugin'
-Bundle 'klen/python-mode'
 Bundle 'tpope/vim-dispatch'
 Bundle 'xolox/vim-misc'
 Bundle 'vzhong/vim-lua-ftplugin'
 
-colorscheme Tomorrow-Night
 
 " My settings
 set cursorline
@@ -51,6 +49,11 @@ set smartcase
 
 " Leader key
 let mapleader = "\<Space>"
+
+" Colorscheme
+" Note: the first time this won't work, but it will work after you run
+" :BundleInstall
+colorscheme Tomorrow-Night
 
 " Open nerdtree by default
 " autocmd vimenter * NERDTree

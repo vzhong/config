@@ -1,14 +1,1 @@
-.DS_Store
-*.py[cod]
-*-bundle
-*.cache/
-*History
-*~
-*#
-
-zgen/
-vim/
-emacs.d/
-libs/
-local/
-bundle/
+.ropeproject/

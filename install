@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+
+set -x
+set -e
+
+echo "Git cloning repos"
+./gitclone
+
+echo "Installing packages"
+./arch_packages
+
+if [ "$SHELL" != "/usr/bin/zsh" ];
+then
+  echo "Changing shell to zsh"
+fi
+
+echo "Linking config files"
+./link
+
+echo "Setting up wallpaper"
+./wallpaper

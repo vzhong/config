@@ -24,11 +24,3 @@ mcd() {
     mkdir -p $@
     cd $@
 }
-
-mkdoc() {
-    if [ ! -d docs ]; then
-      echo "making directory docs"
-      mkdir docs
-    fi
-    dokx-build-package-docs -o docs .
-}

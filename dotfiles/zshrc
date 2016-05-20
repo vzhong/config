@@ -6,7 +6,7 @@ else
 fi
 
 # load zgen
-source "${HOME}/config/zgen/zgen.zsh"
+source "${HOME}/.config/zgen/zgen.zsh"
 
 # # check if there's no init script
 if ! zgen saved; then
@@ -38,5 +38,3 @@ if [ -f ~/.localrc ]; then
 fi
 
 source ~/.pathrc
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

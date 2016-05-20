@@ -1,0 +1,29 @@
+#!/usr/bin/env python
+
+import os
+
+def link(fin, fout):
+  fin, fout = [os.path.abspath(p) for p in [fin, fout]]
+  if os.path.lexists(fout):
+    print('removing {}'.format(fout))
+    os.unlink(fout)
+  print('creating symlink from {} to {}'.format(fin, fout))
+  os.symlink(fin, fout)
+
+
+if __name__ == '__main__':
+  mydir = os.path.abspath(os.path.dirname(__file__))
+  home_dir = os.path.abspath(os.environ['HOME'])
+
+  print('linking dotfiles')
+  dotfiles_dir = os.path.join(mydir, 'dotfiles')
+  assert os.path.isdir(dotfiles_dir)
+
+  for fname in os.listdir(dotfiles_dir):
+    fin = os.path.join(dotfiles_dir, fname)
+    if os.path.isfile(fin) and not fin.startswith('.'):
+      fout = os.path.join(home_dir, '.{}'.format(fname))
+      link(fin, fout)
+
+  print('linking i3')
+  link(os.path.join(mydir, 'i3'), os.path.join(home_dir, '.config', 'i3'))
