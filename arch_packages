@@ -1,2 +1,23 @@
 #!/usr/bin/env sh
-yaourt -S --noconfirm --needed vim tmux i3 jdk zsh google-chrome feh playerctl atool arandr ttf-font-awesome lxappearance i3blocks gtk-theme-arc rofi scrot rxvt-unicode 
+yaourt \
+-S \
+--noconfirm \
+--needed \
+vim \
+tmux \
+i3 \
+jdk \
+zsh \
+google-chrome \
+feh \
+playerctl \
+atool \
+arandr \
+ttf-font-awesome \
+lxappearance \
+i3blocks \
+gtk-theme-arc \
+rofi \
+scrot \
+rxvt-unicode \
+mosh
