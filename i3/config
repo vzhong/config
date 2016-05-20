@@ -35,9 +35,6 @@ set $base0E #c0b7f9
 set $base0F #fcc09e
 
 
-
-
-
 ################################################################
 # Apps
 ################################################################
@@ -58,8 +55,20 @@ exec_always feh --bg-fill --randomize ~/.config/wallpaper/*
 # compton
 exec_always compton -f
 
+# dropbox
+exec --no-startup-id dropbox start
+
 # Xresources
 exec xrdb -merge ~/.Xresources
+
+# locker
+exec_always --no-startup-id light-locker
+
+# Google music
+exec google-play-music-desktop-player
+
+
+
 
 
 ################################################################
@@ -76,7 +85,7 @@ bindsym $mod+Ctrl+r restart
 bindsym $mod+Ctrl+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # lock screen
-bindsym $mod+Ctrl+l exec i3lock
+bindsym $mod+Ctrl+l exec light-locker-command -l
 
 
 # Pulse Audio controls
@@ -251,11 +260,11 @@ client.urgent           $base02 $base08    $base00 $base0F
 ################################################################
 bar {
   status_command i3blocks -c ~/.config/i3/i3blocks.conf
-  # position bottom
   # # strip_workspace_numbers yes
   # height 25
   # bindsym button4 nop
   # bindsym button5 nop
+  tray_output primary
   position top
   colors {
     separator $base03
@@ -268,3 +277,4 @@ bar {
     urgent_workspace   $base01 $base01    $base08
   }
 }
+

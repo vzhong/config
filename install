@@ -7,7 +7,7 @@ echo "Installing packages"
 ./arch_packages
 
 echo "Git cloning repos"
-./gitclone
+./clone_repo
 
 if [ "$SHELL" != "/usr/bin/zsh" ];
 then

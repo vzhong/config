@@ -1,39 +1,54 @@
 Xft*antialias:          true
 Xft*hinting:            full
+Xft*dpi:                164
+Xft*font:               xft:Work Sans:size=14:antialias=true
 
 URxvt*loginShell:       true
 URxvt*geometry:         80x25
 URxvt*borderLess:       false
 URxvt.scrollBar:        false
 URxvt*cursorBlink:      false
-URxvt*cursorUnderline:  true
+URxvt*cursorUnderline:  false
 URxvt.transparent:      true
-URxvt.shading:          10
+URxvt.shading:          5
 URxvt.tintColor:        white
 
 URxvt*font:             xft:Roboto Mono:size=14:antialias=true
 URxvt.boldFont:         xft:Roboto Mono:bold:size=14:antialias=true
  
-URxvt*urlLauncher:      /usr/bin/google-chrome-stable
+URxvt.perl-ext-common:  default,matcher,selection-to-clipboard
 
 
-! ! Tomorrow Night
- URxvt.foreground:  #c5c8c6
- URxvt.background:  #1d1f21
- URxvt.cursorColor: #aeafad
- URxvt.color0:      #000000
- URxvt.color1:      #912226
- URxvt.color2:      #778900
- URxvt.color3:      #ae7b00
- URxvt.color4:      #1d2594
- URxvt.color5:      #682a9b
- URxvt.color6:      #2b6651
- URxvt.color7:      #929593
- URxvt.color8:      #666666
- URxvt.color9:      #cc6666
- URxvt.color10:     #b5bd68
- URxvt.color11:     #f0c674
- URxvt.color12:     #81a2be
- URxvt.color13:     #b294bb
- URxvt.color14:     #8abeb7
- URxvt.color15:     #ecebec
+!! URLs
+URxvt.url-launcher:     /usr/bin/google-chrome-stable
+URxvt.matcher.button:   1
+
+
+!! Keyboarrd
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.keysym.C-C: perl:clipboard:copy
+URxvt.keysym.C-V: perl:clipboard:paste
+URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
+
+
+!! Tomorrow Night
+URxvt.foreground:  #c5c8c6
+URxvt.background:  #1d1f21
+URxvt.cursorColor: #aeafad
+URxvt.color0:      #000000
+URxvt.color1:      #912226
+URxvt.color2:      #778900
+URxvt.color3:      #ae7b00
+URxvt.color4:      #1d2594
+URxvt.color5:      #682a9b
+URxvt.color6:      #2b6651
+URxvt.color7:      #929593
+URxvt.color8:      #666666
+URxvt.color9:      #cc6666
+URxvt.color10:     #b5bd68
+URxvt.color11:     #f0c674
+URxvt.color12:     #81a2be
+URxvt.color13:     #b294bb
+URxvt.color14:     #8abeb7
+URxvt.color15:     #ecebec

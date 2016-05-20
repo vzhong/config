@@ -1,23 +1,9 @@
 #!/usr/bin/env sh
-yaourt \
--S \
---noconfirm \
---needed \
-vim \
-tmux \
-i3 \
-jdk \
-zsh \
-google-chrome \
-feh \
-playerctl \
-atool \
-arandr \
-ttf-font-awesome \
-lxappearance \
-i3blocks \
-gtk-theme-arc \
-rofi \
-scrot \
-rxvt-unicode \
-mosh
+
+DEVELOPMENT="vim tmux zsh jdk atool rxvt-unicode mosh openssh vim-command-t"
+DESKTOP="i3 i3blocks feh playerctl ttf-font-awesome arandr lxappearance gtk-theme-arc rofi scrot light-locker"
+APPS="google-chrome 1pass-hg dropbox slack-desktop google-play-music-desktop-player-git"
+
+OPTIONS="-S --noconfirm --needed"
+
+yaourt $OPTIONS $DEVELOPMENT $DESKTOP $APPS

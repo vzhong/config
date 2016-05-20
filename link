@@ -27,3 +27,6 @@ if __name__ == '__main__':
 
   print('linking i3')
   link(os.path.join(mydir, 'i3'), os.path.join(home_dir, '.config', 'i3'))
+
+  print('linking vim snippets')
+  link(os.path.join(mydir, 'snippets'), os.path.join(home_dir, '.vim', 'snippets'))

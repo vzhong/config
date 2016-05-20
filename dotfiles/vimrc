@@ -17,7 +17,7 @@ Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-fugitive'
 Bundle 'powerline/powerline'
 Bundle 'scrooloose/syntastic'
-Bundle 'kien/ctrlp.vim'
+Bundle 'wincent/command-t'
 Bundle 'slim-template/vim-slim'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/nerdtree'
@@ -25,6 +25,12 @@ Bundle 'Xuyuanp/nerdtree-git-plugin'
 Bundle 'tpope/vim-dispatch'
 Bundle 'xolox/vim-misc'
 Bundle 'vzhong/vim-lua-ftplugin'
+Bundle 'xolox/vim-notes'
+
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'vzhong/vim-snippets'
 
 
 " My settings
@@ -51,9 +57,12 @@ set smartcase
 let mapleader = "\<Space>"
 
 " Colorscheme
-" Note: the first time this won't work, but it will work after you run
+" The first time this won't work, but it will work after you run
 " :BundleInstall
 colorscheme Tomorrow-Night
+" Transparent background
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
 
 " Open nerdtree by default
 " autocmd vimenter * NERDTree
@@ -109,15 +118,6 @@ let g:pymode_rope_complete_on_dot = 0
 let g:pymode_doc_bind = 'K'
 let g:pymode_folding = 0
 
-" CtrlP
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-
 " Compilation
 autocmd FileType java let b:dispatch = 'javac %'
 autocmd FileType lua let b:dispatch = 'th %'
@@ -133,3 +133,20 @@ let g:lua_compiler_args = '-bl'
 let g:syntastic_check_on_open = 1
 let g:syntastic_lua_checkers = ["luacheck"]
 let g:syntastic_lua_luacheck_args = "--no-unused-args"
+
+" Snipmate
+imap <C-J> <Plug>snipMateNextOrTrigger
+imap <C-K> <Plug>snipMateBack
+
+" Command T
+nnoremap <leader>tc :CommandTCommand<CR>
+nnoremap <leader>th :CommandTHelp<CR>
+
+" Notes
+nnoremap <leader>nn :Note 
+nnoremap <leader>nd :DeleteNote<CR>
+nnoremap <leader>ns :SearchNotes 
+nnoremap <leader>nv :SplitNoteFromSelectedText
+let g:notes_directories = ['~/Dropbox/notes']
+let g:notes_suffix = '.md'
+let g:notes_title_sync = 'rename_file'
