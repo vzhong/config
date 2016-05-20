@@ -3,11 +3,11 @@
 set -x
 set -e
 
-echo "Git cloning repos"
-./gitclone
-
 echo "Installing packages"
 ./arch_packages
+
+echo "Git cloning repos"
+./gitclone
 
 if [ "$SHELL" != "/usr/bin/zsh" ];
 then

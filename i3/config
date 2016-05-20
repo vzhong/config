@@ -58,6 +58,9 @@ exec_always feh --bg-fill --randomize ~/.config/wallpaper/*
 # compton
 exec_always compton -f
 
+# Xresources
+exec xrdb -merge ~/.Xresources
+
 
 ################################################################
 # Keys
