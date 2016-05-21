@@ -1,14 +1,15 @@
 #!/usr/bin/env sh
 
 export PATH=${HOME}/.config/setup/bin:$PATH
+export LOCAL_ROOT=${HOME}/.local
 
 if [ -n "${CONDA_ROOT+1}" ]; then
-    export PATH=${CONDA_ROOT}/bin:$PATH
+  export PATH=${CONDA_ROOT}/bin:$PATH
 fi
 
 if [ -n "${CUDA_ROOT+1}" ]; then
-    export PATH=${CUDA_ROOT}/bin:$PATH
-    export LD_LIBRARY_PATH=${CUDA_ROOT}/lib64:$LD_LIBRARY_PATH
+  export PATH=${CUDA_ROOT}/bin:$PATH
+  export LD_LIBRARY_PATH=${CUDA_ROOT}/lib64:$LD_LIBRARY_PATH
 fi
 
 if [ -n "${TORCH_ROOT+1}" ]; then
@@ -22,8 +23,15 @@ if [ -n "${BREW_ROOT+1}" ]; then
 fi
 
 if [ -n "${LOCAL_ROOT+1}" ]; then
-    export PATH=${LOCAL}/bin:$PATH
-    export LD_LIBRARY_PATH=${LOCAL}/lib:$LD_LIBRARY_PATH
+  mkdir -p ${LOCAL_ROOT}/bin
+  mkdir -p ${LOCAL_ROOT}/lib
+  export PATH=${LOCAL_ROOT}/bin:$PATH
+  export LD_LIBRARY_PATH=${LOCAL_ROOT}/lib:$LD_LIBRARY_PATH
+fi
+
+if [ -n "${VMAP_ROOT+1}" ]; then
+  mkdir -p ${VMAP_ROOT}
+  source ~/.config/setup/env/vmap
 fi
 
 export EDITOR=vim

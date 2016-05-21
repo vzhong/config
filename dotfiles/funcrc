@@ -48,3 +48,8 @@ gitclone() {
 arch_clean() {
   yaourt -Rns $(pacman -Qtdq)
 }
+
+## update
+arch_update() {
+  yaourt -Syu
+}

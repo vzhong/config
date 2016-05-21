@@ -1,0 +1,54 @@
+#!/usr/bin/env sh
+
+vhelp() {
+  echo "# print the mapped directory to <name>"
+  echo "vget <name>"
+  echo ""
+  echo "# cd to mapped directory to <name>"
+  echo "vgo <name>"
+  echo ""
+  echo "# set the mapped directory to <name> to <to>. If <to> is not given, then the current directory will be used."
+  echo "vset <name> [to]"
+}
+
+vget() {
+  local NAME=$1
+  echo "${VMAP_ROOT}/${NAME}.map"
+}
+
+vgo() {
+  local NAME=$1
+  local MAP=$(vget ${NAME})
+  if [ ! -f $MAP ]; then
+    echo "Map does not exist for ${NAME}."
+    vhelp
+  else
+    cd $(cat ${MAP})
+  fi
+}
+
+vset() {
+  local NAME=$1
+  local TO=$2
+  local MAP=$(vget ${NAME})
+  if [ -n "${TO+1}" ]; then
+    TO=$(pwd)
+  fi
+  echo $TO > $MAP
+  echo "Set mapping for ${NAME} to ${TO}"
+}
+
+vunset() {
+  local NAME=$1
+  local MAP=$(vget ${NAME})
+  rm $MAP
+  echo "Removed mapping for ${NAME} at ${MAP}"
+}
+
+vlist() {
+  for FMAP in $(ls ${VMAP_ROOT})
+  do
+    echo ">> $FMAP"
+    cat "${VMAP_ROOT}/${FMAP}"
+  done
+}
