@@ -18,8 +18,11 @@ def proc_percentage(e):
     quarter = int(percentage / 20.)
     return "{} {}".format(battery[quarter], stripped)
 
-def proc_remaining(e):
+def proc_discharging(e):
     return '({})'.format(':'.join(e.split(':')[:2])).replace(' ', '')
+
+def proc_charging(e):
+    return '(⚡{})'.format(':'.join(e.split(':')[:2])).replace(' ', '')
     
 if __name__ == '__main__':
     stdout = subprocess.getoutput("acpi")
@@ -30,6 +33,8 @@ if __name__ == '__main__':
             if '%' in e:
                 o += [proc_percentage(e)]
             elif 'remaining' in e:
-                o += [proc_remaining(e)]
+                o += [proc_discharging(e)]
+            elif 'until' in e:
+                o += [proc_charging(e)]
         out += [' '.join(o)]
     print(' '.join(out))

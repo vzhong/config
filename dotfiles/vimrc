@@ -121,6 +121,7 @@ let g:pymode_folding = 0
 " Compilation
 autocmd FileType java let b:dispatch = 'javac %'
 autocmd FileType lua let b:dispatch = 'th %'
+autocmd FileType python let b:dispatch = 'python %'
 nnoremap <leader>r :Dispatch<CR>
 
 " Lua
@@ -149,4 +150,4 @@ nnoremap <leader>ns :SearchNotes
 nnoremap <leader>nv :SplitNoteFromSelectedText
 let g:notes_directories = ['~/Dropbox/notes']
 let g:notes_suffix = '.md'
-" let g:notes_title_sync = 'rename_file'
+let g:notes_title_sync = 'no'

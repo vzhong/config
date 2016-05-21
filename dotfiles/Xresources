@@ -9,6 +9,7 @@ URxvt*borderLess:       false
 URxvt.scrollBar:        false
 URxvt*cursorBlink:      false
 URxvt*cursorUnderline:  false
+URxvt*visualBell:       true
 URxvt.transparent:      true
 URxvt.shading:          20
 URxvt.tintColor:        grey

@@ -43,8 +43,8 @@ set $workspace5 "5"
 set $workspace6 "6"
 set $workspace7 "7"
 set $workspace8 "8"
-set $workspace9 "9: "
-set $workspace10 "10: "
+set $workspace9 "9: "
+set $workspace10 "10: "
 
 
 ################################################################
@@ -76,17 +76,22 @@ exec xrdb -merge ~/.Xresources
 # locker
 exec --no-startup-id light-locker
 
-# music
-exec google-play-music-desktop-player
-
 # 1password
 exec --no-startup-id 1pass
 
-# Mail
-exec nylas
-
-# Mail
+# Browser
 exec google-chrome-stable
+
+# Calendar
+exec california
+
+# Mailbox
+exec thunderbird
+
+# Disable touchscreen
+exec xinput disable 9
+
+
 
 
 ################################################################
@@ -112,8 +117,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% #d
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle # mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec light -A 2 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 2 # decrease screen brightness
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play
@@ -213,7 +218,7 @@ bindsym $mod+0 workspace $workspace10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace1
-bindsym $mod+Shift+2 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
 bindsym $mod+Shift+4 move container to workspace $workspace4
 bindsym $mod+Shift+5 move container to workspace $workspace5
@@ -259,10 +264,9 @@ bindsym $mod+s mode "resize"
 ################################################################
 
 assign [class="google-chrome"] $workspace2
-assign [class="Google Play Music Desktop Player"] $workspace10
-assign [class="Nylas N1"] $workspace9
+assign [class="Mail"] $workspace10
+assign [class="california"] $workspace9
 
-for_window [class="Nylas N1"] floating enable
 for_window [class="1pass"] floating enable
 
 ################################################################

@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import subprocess
+
+
+def proc_line(line):
+    els = line.split()
+    key = els[0].strip()
+    val = ' '.join(els[1:]).strip()
+    return key, val
+    
+if __name__ == '__main__':
+    stdout = subprocess.getoutput("forecast")
+    out = dict(proc_line(line) for line in stdout.split('\n'))
+    print('{} {}'.format(out['Temperature'], out['Condition']))

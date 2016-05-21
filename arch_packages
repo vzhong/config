@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
-DEVELOPMENT="vim tmux zsh jdk atool rxvt-unicode mosh openssh vim-command-t python-pip"
-DESKTOP="i3 i3blocks feh playerctl ttf-font-awesome arandr lxappearance gtk-theme-arc rofi scrot light-locker"
-APPS="google-chrome 1pass-hg dropbox slack-desktop google-play-music-desktop-player-git n1-git"
-HARDWARE="lm_sensors sysstat pavucontrol tlp acpi acpi_call"
+DEVELOPMENT="vim tmux zsh jdk atool rxvt-unicode mosh openssh vim-command-t python-pip vim-youcompleteme-git"
+DESKTOP="i3 i3blocks feh playerctl ttf-font-awesome arandr lxappearance gtk-theme-arc rofi scrot light-locker forecast-git"
+APPS="google-chrome 1pass-hg dropbox slack-desktop thunderbird california"
+HARDWARE="lm_sensors sysstat pavucontrol tlp acpi acpi_call light"
 THINKPAD="tp_smapi thinkfan"
 
 OPTIONS="-S --noconfirm --needed"
