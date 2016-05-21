@@ -260,8 +260,10 @@ bindsym $mod+s mode "resize"
 
 assign [class="google-chrome"] $workspace2
 assign [class="Google Play Music Desktop Player"] $workspace10
-for_window [class="Nylas N1"] floating enable
 assign [class="Nylas N1"] $workspace9
+
+for_window [class="Nylas N1"] floating enable
+for_window [class="1pass"] floating enable
 
 ################################################################
 # Colors
