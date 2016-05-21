@@ -1,6 +1,6 @@
 Xft*antialias:          true
 Xft*hinting:            full
-Xft*dpi:                164
+Xft*dpi:                96
 Xft*font:               xft:Work Sans:size=14:antialias=true
 
 URxvt*loginShell:       true

@@ -1,0 +1,35 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import subprocess
+
+
+battery = {
+        0: '',
+        1: '',
+        2: '',
+        3: '',
+        4: '',
+        }
+
+def proc_percentage(e):
+    stripped = e.strip()
+    percentage = float(stripped.rstrip('%'))
+    quarter = int(percentage / 20.)
+    return "{} {}".format(battery[quarter], stripped)
+
+def proc_remaining(e):
+    return '({})'.format(':'.join(e.split(':')[:2])).replace(' ', '')
+    
+if __name__ == '__main__':
+    stdout = subprocess.getoutput("acpi")
+    out = []
+    for line in stdout.split('\n'):
+        o = []
+        for e in line.split(','):
+            if '%' in e:
+                o += [proc_percentage(e)]
+            elif 'remaining' in e:
+                o += [proc_remaining(e)]
+        out += [' '.join(o)]
+    print(' '.join(out))

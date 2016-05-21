@@ -14,7 +14,8 @@
 ################################################################
 
 # Mod
-set $mod Mod4
+set $mod Mod1
+set $sup Mod4
 
 # Color defs
 set $base00 #101218
@@ -54,7 +55,7 @@ set $workspace10 "10: "
 bindsym $mod+Return exec i3-sensible-terminal
 
 # search
-bindsym $mod+r exec rofi -show run -lines 10 \
+bindsym $mod+space exec rofi -show run -lines 10 \
     -eh 2 \
     -opacity "85" \
     -bw 0 -bc "$bg-color" -bg "$bh-color" -fg "$text-color" -hlbg "$bg-color" \
@@ -106,9 +107,9 @@ bindsym $mod+Ctrl+l exec light-locker-command -l
 
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle # mute sound
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
@@ -187,10 +188,10 @@ bindsym $mod+f fullscreen toggle
 # bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+f floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+Shift focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent

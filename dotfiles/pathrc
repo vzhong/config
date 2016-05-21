@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+export PATH=${HOME}/.config/setup/bin:$PATH
+
 if [ -n "${CONDA_ROOT+1}" ]; then
     export PATH=${CONDA_ROOT}/bin:$PATH
 fi

@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+set -x
+set -e
+
+sudo cp /usr/share/doc/thinkfan/examples/thinkfan.conf.simple /etc/thinkfan.conf
+
+sudo systemctl enable tlp.service
+sudo systemctl enable tlp-sleep.service
+sudo systemctl enable systemd-rfkill.service
+sudo systemctl enable thinkfan

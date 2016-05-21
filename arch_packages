@@ -1,10 +1,11 @@
 #!/usr/bin/env sh
 
-DEVELOPMENT="vim tmux zsh jdk atool rxvt-unicode mosh openssh vim-command-t"
+DEVELOPMENT="vim tmux zsh jdk atool rxvt-unicode mosh openssh vim-command-t python-pip"
 DESKTOP="i3 i3blocks feh playerctl ttf-font-awesome arandr lxappearance gtk-theme-arc rofi scrot light-locker"
 APPS="google-chrome 1pass-hg dropbox slack-desktop google-play-music-desktop-player-git n1-git"
-HARDWARE="lm_sensors sysstat"
+HARDWARE="lm_sensors sysstat pavucontrol tlp acpi acpi_call"
+THINKPAD="tp_smapi thinkfan"
 
 OPTIONS="-S --noconfirm --needed"
 
-yaourt $OPTIONS $DEVELOPMENT $DESKTOP $APPS $HARDWARE
+yaourt $OPTIONS $DEVELOPMENT $DESKTOP $APPS $HARDWARE $THINKPAD
