@@ -149,4 +149,4 @@ nnoremap <leader>ns :SearchNotes
 nnoremap <leader>nv :SplitNoteFromSelectedText
 let g:notes_directories = ['~/Dropbox/notes']
 let g:notes_suffix = '.md'
-let g:notes_title_sync = 'rename_file'
+" let g:notes_title_sync = 'rename_file'

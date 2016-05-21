@@ -10,8 +10,8 @@ URxvt.scrollBar:        false
 URxvt*cursorBlink:      false
 URxvt*cursorUnderline:  false
 URxvt.transparent:      true
-URxvt.shading:          5
-URxvt.tintColor:        white
+URxvt.shading:          20
+URxvt.tintColor:        grey
 
 URxvt*font:             xft:Roboto Mono:size=14:antialias=true
 URxvt.boldFont:         xft:Roboto Mono:bold:size=14:antialias=true

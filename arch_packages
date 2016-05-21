@@ -2,8 +2,9 @@
 
 DEVELOPMENT="vim tmux zsh jdk atool rxvt-unicode mosh openssh vim-command-t"
 DESKTOP="i3 i3blocks feh playerctl ttf-font-awesome arandr lxappearance gtk-theme-arc rofi scrot light-locker"
-APPS="google-chrome 1pass-hg dropbox slack-desktop google-play-music-desktop-player-git"
+APPS="google-chrome 1pass-hg dropbox slack-desktop google-play-music-desktop-player-git n1-git"
+HARDWARE="lm_sensors sysstat"
 
 OPTIONS="-S --noconfirm --needed"
 
-yaourt $OPTIONS $DEVELOPMENT $DESKTOP $APPS
+yaourt $OPTIONS $DEVELOPMENT $DESKTOP $APPS $HARDWARE
