@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-DEVELOPMENT="vim tmux zsh jdk atool rxvt-unicode mosh openssh vim-command-t python-pip vim-youcompleteme-git python-docopt"
-DESKTOP="i3 i3blocks feh playerctl ttf-font-awesome arandr lxappearance gtk-theme-arc rofi scrot light-locker forecast-git"
+DEVELOPMENT="vim tmux zsh jdk atool rxvt-unicode mosh openssh vim-command-t python-pip python-docopt clang"
+DESKTOP="i3 i3blocks feh playerctl ttf-font-awesome arandr lxappearance gtk-theme-arc rofi scrot light-locker forecast-git ranger"
 APPS="google-chrome 1pass-hg dropbox slack-desktop thunderbird california"
 HARDWARE="lm_sensors sysstat pavucontrol tlp acpi acpi_call light"
 THINKPAD="tp_smapi thinkfan"

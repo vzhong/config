@@ -70,6 +70,9 @@ exec_always compton -f
 # dropbox
 exec --no-startup-id dropbox start
 
+# network manager
+exec --no-startup-id nm-applet
+
 # Xresources
 exec xrdb -merge ~/.Xresources
 
@@ -264,8 +267,8 @@ bindsym $mod+s mode "resize"
 ################################################################
 
 assign [class="google-chrome"] $workspace2
-assign [class="Mail"] $workspace10
-assign [class="california"] $workspace9
+assign [class="Thunderbird"] $workspace10
+assign [class="California"] $workspace9
 
 for_window [class="1pass"] floating enable
 
@@ -290,7 +293,6 @@ bar {
   # height 25
   # bindsym button4 nop
   # bindsym button5 nop
-  tray_output primary
   position top
   colors {
     separator $base03

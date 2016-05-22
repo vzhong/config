@@ -107,17 +107,6 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<ENTER>']
 
-" Python mode
-let g:syntastic_ignore_files = ['\.py$'] " disable syntastic linting
-let g:pymode_lint = 1
-let g:pymode_lint_message = 1
-let g:pymode_lint_ignore = "E402,E501,E302,E111,E114"
-let g:pymode_lint_on_write = 1
-let g:pymode_options_colorcolumn = 0
-let g:pymode_rope_complete_on_dot = 0
-let g:pymode_doc_bind = 'K'
-let g:pymode_folding = 0
-
 " Compilation
 autocmd FileType java let b:dispatch = 'javac %'
 autocmd FileType lua let b:dispatch = 'th %'
