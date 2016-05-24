@@ -4,9 +4,8 @@ DEVELOPMENT="vim tmux zsh jdk atool terminator mosh openssh vim-command-t python
 DESKTOP="i3 i3blocks feh playerctl ttf-font-awesome arandr lxappearance gtk-theme-arc rofi scrot light-locker forecast-git ranger redshift"
 APPS="chromium 1pass-hg dropbox slack-desktop thunderbird california"
 HARDWARE="lm_sensors sysstat pavucontrol tlp acpi acpi_call light"
-THINKPAD="tp_smapi"
 MATH="python-theano python-ujson"
 
 OPTIONS="-S --noconfirm --needed"
 
-yaourt $OPTIONS $DEVELOPMENT $DESKTOP $APPS $HARDWARE $THINKPAD $MATH
+yaourt $OPTIONS $DEVELOPMENT $DESKTOP $APPS $HARDWARE $MATH
