@@ -275,6 +275,7 @@ assign [class="Thunderbird"] $workspace10
 assign [class="California"] $workspace9
 
 for_window [class="1pass"] floating enable
+for_window [class="darktable"] floating enable
 
 ################################################################
 # Colors
