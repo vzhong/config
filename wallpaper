@@ -6,4 +6,5 @@ then
   echo "Downloading wallpaper... Warning: this is a very large download!"
   wget -O wallpaper.zip http://imgur.com/a/SPmIR/zip
   aunpack wallpaper.zip -X ${WALLPAPER}
+  rm wallpaper.zip
 fi

@@ -62,10 +62,10 @@ bindsym $mod+space exec rofi -show run -lines 10 \
     -font "Work Sans 20"
 
 # wallpaper
-exec_always feh --bg-fill --randomize ~/.config/wallpaper/*
+exec_always --no-startup-id feh --bg-fill --randomize ~/.config/wallpaper/*
 
 # compton
-exec_always compton -f
+exec_always --no-startup-id compton -f
 
 # dropbox
 exec --no-startup-id dropbox start
@@ -73,8 +73,11 @@ exec --no-startup-id dropbox start
 # network manager
 exec --no-startup-id nm-applet
 
+# power manager
+exec –no-startup-id && xfce4-power-manager
+
 # Xresources
-exec xrdb -merge ~/.Xresources
+exec --no-startup-id xrdb -merge ~/.Xresources
 
 # locker
 exec --no-startup-id light-locker
@@ -83,16 +86,17 @@ exec --no-startup-id light-locker
 exec --no-startup-id 1pass
 
 # Browser
-exec google-chrome-stable
+exec --no-startup-id opera-developer
 
 # Calendar
-exec california
+exec --no-startup-id california
 
 # Mailbox
-exec thunderbird
+exec --no-startup-id thunderbird
 
 # Disable touchscreen
-exec xinput disable 9
+exec --no-startup-id xinput disable 9
+
 
 
 
@@ -266,7 +270,7 @@ bindsym $mod+s mode "resize"
 # Assignments
 ################################################################
 
-assign [class="google-chrome"] $workspace2
+assign [class="Opera developer"] $workspace2
 assign [class="Thunderbird"] $workspace10
 assign [class="California"] $workspace9
 
