@@ -43,41 +43,39 @@ set $workspace5 "5"
 set $workspace6 "6"
 set $workspace7 "7"
 set $workspace8 "8"
-set $workspace9 "9: "
-set $workspace10 "10: "
+set $workspace9 "9: "
+
 
 
 ################################################################
-# Apps
+# Services
 ################################################################
 
-# start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+# xfce
+# xfce settings
+exec --no-startup-id xfsettingsd --replace
+# power manager
+exec --no-startup-id xfce4-power-manager --replace
+# network manager
+exec --no-startup-id nm-applet
 
-# search
-bindsym $mod+space exec rofi -show run -lines 10 \
-    -eh 2 \
-    -opacity "85" \
-    -bw 0 -bc "$bg-color" -bg "$bh-color" -fg "$text-color" -hlbg "$bg-color" \
-    -font "Work Sans 20"
+# no longer used / replaced by xfce4
+# Xresources
+# exec --no-startup-id xrdb -merge ~/.Xresources
+# automount
+# exec --no-startup-id udiskie -ans
+# Disable touchscreen
+# exec --no-startup-id xinput disable 9
+
 
 # wallpaper
 exec_always --no-startup-id feh --bg-fill --randomize ~/.config/wallpaper/*
 
-# compton
-exec_always --no-startup-id compton -f
-
-# dropbox
-exec --no-startup-id dropbox start
-
-# network manager
-exec --no-startup-id nm-applet
+# sound
+exec --no-startup-id pa-systray
 
 # screen dimmer
 exec --no-startup-id redshift-gtk
-
-# Xresources
-exec --no-startup-id xrdb -merge ~/.Xresources
 
 # locker
 exec --no-startup-id light-locker
@@ -85,18 +83,21 @@ exec --no-startup-id light-locker
 # 1password
 exec --no-startup-id 1pass
 
-# Browser
-exec --no-startup-id opera-developer
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
 
-# Calendar
-exec --no-startup-id california
+
+
+################################################################
+# Apps
+################################################################
+
+
+# Browser
+exec --no-startup-id chromium
 
 # Mailbox
 exec --no-startup-id thunderbird
-
-# Disable touchscreen
-exec --no-startup-id xinput disable 9
-
 
 
 
@@ -104,6 +105,19 @@ exec --no-startup-id xinput disable 9
 ################################################################
 # Keys
 ################################################################
+
+# start scratch space
+bindsym $mod+0 scratchpad show
+bindsym $mod+Shift+0 move scratchpad
+
+# search
+bindsym $mod+space exec xfce4-appfinder --disable-server
+
+# settings
+bindsym $sup+$mod+p exec xfce4-settings-manager
+
+# task manager
+bindsym $sup+$mod+t exec xfce4-taskmanager
 
 # reload the configuration file
 bindsym $mod+Ctrl+c reload
@@ -125,16 +139,14 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% #d
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle # mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec light -A 2 # increase screen brightness
-bindsym XF86MonBrightnessDown exec light -U 2 # decrease screen brightness
+# bindsym XF86MonBrightnessUp exec light -A 2 # increase screen brightness
+# bindsym XF86MonBrightnessDown exec light -U 2 # decrease screen brightness
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play
 bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
-
-
 
 
 ################################################################
@@ -144,14 +156,6 @@ bindsym XF86AudioPrev exec playerctl previous
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:Work Sans 14
-
-
-
-
-
-
-
-
 
 
 
@@ -222,7 +226,6 @@ bindsym $mod+6 workspace $workspace6
 bindsym $mod+7 workspace $workspace7
 bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
-bindsym $mod+0 workspace $workspace10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace1
@@ -234,7 +237,6 @@ bindsym $mod+Shift+6 move container to workspace $workspace6
 bindsym $mod+Shift+7 move container to workspace $workspace7
 bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
-bindsym $mod+Shift+0 move container to workspace $workspace10
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -271,13 +273,13 @@ bindsym $mod+s mode "resize"
 # Assignments
 ################################################################
 
-assign [class="Opera developer"] $workspace2
-assign [class="Thunderbird"] $workspace10
-assign [class="California"] $workspace9
+assign [class="chromium"] $workspace2
+assign [class="Thunderbird"] $workspace9
 
 for_window [class="1pass"] floating enable
 for_window [class="darktable"] floating enable
 for_window [class="thunderbird"] floating enable
+for_window [class=".*xfce4.*"] floating enable
 
 ################################################################
 # Colors
