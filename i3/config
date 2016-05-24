@@ -73,8 +73,8 @@ exec --no-startup-id dropbox start
 # network manager
 exec --no-startup-id nm-applet
 
-# power manager
-exec –no-startup-id && xfce4-power-manager
+# screen dimmer
+exec --no-startup-id redshift-gtk
 
 # Xresources
 exec --no-startup-id xrdb -merge ~/.Xresources
@@ -116,6 +116,7 @@ bindsym $mod+Ctrl+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut
 
 # lock screen
 bindsym $mod+Ctrl+l exec light-locker-command -l
+bindsym $mod+$sup+l exec light-locker-command --activate
 
 
 # Pulse Audio controls
@@ -192,7 +193,7 @@ bindsym $mod+ctrl+h split h
 bindsym $mod+ctrl+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 # bindsym $mod+s layout stacking
@@ -200,7 +201,7 @@ bindsym $mod+f fullscreen toggle
 # bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+f floating toggle
+bindsym $mod+Shift+t floating toggle
 
 # change focus between tiling / floating windows
 # bindsym $mod+Shift focus mode_toggle
@@ -276,6 +277,7 @@ assign [class="California"] $workspace9
 
 for_window [class="1pass"] floating enable
 for_window [class="darktable"] floating enable
+for_window [class="thunderbird"] floating enable
 
 ################################################################
 # Colors
