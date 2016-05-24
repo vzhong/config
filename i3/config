@@ -42,7 +42,7 @@ set $workspace4 "4"
 set $workspace5 "5"
 set $workspace6 "6"
 set $workspace7 "7"
-set $workspace8 "8"
+set $workspace8 "8: "
 set $workspace9 "9: "
 
 
@@ -98,6 +98,10 @@ exec --no-startup-id chromium
 
 # Mailbox
 exec --no-startup-id thunderbird
+
+# Chat
+exec --no-startup-id franz
+
 
 
 
@@ -275,6 +279,7 @@ bindsym $mod+s mode "resize"
 
 assign [class="chromium"] $workspace2
 assign [class="Thunderbird"] $workspace9
+assign [class="franz"] $workspace8
 
 for_window [class="1pass"] floating enable
 for_window [class="darktable"] floating enable
