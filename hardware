@@ -9,5 +9,3 @@ sudo systemctl enable tlp-sleep.service
 sudo systemctl start tlp-sleep.service
 sudo systemctl enable systemd-rfkill.service
 sudo systemctl start systemd-rfkill.service
-
-sudo cp `pwd`/xorg.conf.d/* /etc/X11/xorg.conf.d/

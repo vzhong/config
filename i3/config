@@ -67,6 +67,9 @@ exec --no-startup-id nm-applet
 # Disable touchscreen
 # exec --no-startup-id xinput disable 9
 
+# map keys
+exec xmodmap -e "clear lock"
+exec xmodmap -e "keysym Caps_Lock = Escape"
 
 # wallpaper
 exec_always --no-startup-id feh --bg-fill --randomize ~/.config/wallpaper/*
@@ -100,7 +103,7 @@ exec --no-startup-id chromium
 exec --no-startup-id thunderbird
 
 # Chat
-exec --no-startup-id franz
+# exec --no-startup-id franz
 
 
 
