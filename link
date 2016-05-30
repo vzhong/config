@@ -33,3 +33,6 @@ if __name__ == '__main__':
 
   print('linking 1password')
   link(os.path.join(home_dir, 'Dropbox', 'Apps', '1Password'), os.path.join(home_dir, '1Password'))
+
+  print('linking fonts')
+  link(os.path.join(mydir, 'fonts'), os.path.join(home_dir, '.fonts'))

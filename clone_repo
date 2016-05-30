@@ -20,3 +20,4 @@ gitclone() {
 
 gitclone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/vundle
 gitclone https://github.com/tarjoilija/zgen.git ~/.config/zgen
+gitclone https://github.com/syl20bnr/spacemacs ~/.emacs.d
