@@ -74,6 +74,9 @@ exec xmodmap -e "keysym Caps_Lock = Escape"
 # wallpaper
 exec_always --no-startup-id feh --bg-fill --randomize ~/.config/wallpaper/*
 
+# dropbox
+exec --no-startup-id dropbox
+
 # sound
 exec --no-startup-id pa-systray
 
@@ -119,6 +122,9 @@ bindsym $mod+Shift+0 move scratchpad
 
 # search
 bindsym $mod+space exec xfce4-appfinder --disable-server
+
+# screenshot: select region and put into clipboard
+bindsym $sup+Shift+4 exec xfce4-screenshooter -r -c
 
 # settings
 bindsym $sup+$mod+p exec xfce4-settings-manager
