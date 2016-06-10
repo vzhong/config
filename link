@@ -36,3 +36,6 @@ if __name__ == '__main__':
 
   print('linking fonts')
   link(os.path.join(mydir, 'fonts'), os.path.join(home_dir, '.fonts'))
+
+  print('linking Qt')
+  link(os.path.join(mydir, 'env', 'Trolltech.conf'), os.path.join(home_dir, '.config', 'Trolltech.conf'))
