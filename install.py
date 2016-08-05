@@ -104,14 +104,10 @@ def install_rvm():
 
 def install_editors():
   # vim
-  # brew_install('vim')
   link('vim', '.vim')
   mkdir_if_not_exist('vim/bundle')
   git_clone('https://github.com/tarjoilija/zgen.git')
-  # git_clone('https://github.com/klen/python-mode.git', to='vim/bundle/python-mode')
-  # git_clone('https://github.com/chriskempson/tomorrow-theme.git')
   git_clone('https://github.com/gmarik/Vundle.vim.git', to='vim/bundle/vundle')
-  # git_clone('https://github.com/flazz/vim-colorschemes.git', to='vim/bundle/colorschemes')
 
   # emacs
   # if get_os() == 'mac':
@@ -126,7 +122,6 @@ def install_editors():
 
 def install_os_specific():
   if get_os() == 'mac':
-    run('brew install caskroom/cask/brew-cask')
     run('brew cask install seil java iterm2 flux spectacle')
     # disable photo app auto startup on connecting ios device
     run('defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true')
@@ -152,17 +147,10 @@ if __name__ == '__main__':
     install_homebrew()
 
   # python
-  brew_install('python', tap='homebrew/python')
+  brew_install('anaconda')
 
-  # ruby (RVM)
-  if not get_executable('rvm'):
-    install_rvm()
-  # optional fun bropages
-  if not get_executable('bro'):
-    run('gem install bropages')
-
-  # # shell
-  brew_install(['zsh', 'tmux', 'mosh', 'cmake'])
+  # shell
+  brew_install(['vim', 'zsh', 'tmux', 'mosh', 'cmake'])
   # link tmux
   link('tmux', '.tmux.d')
 

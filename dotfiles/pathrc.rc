@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 export PATH=/usr/local/bin:$PATH
 LOCAL=~/local
 
@@ -13,9 +12,8 @@ export LOCAL_ROOT=${HOME}/.local
 export PATH=${LOCAL_ROOT}/bin:$PATH
 export LD_LIBRARY_PATH=${VICTOR_ROOT}/lib:$LD_LIBRARY_PATH
 
-if [ -d $CONDA_ROOT ]; then
-    export PATH=${CONDA_ROOT}/bin:$PATH
-fi
+# Anaconda from install.py
+export PATH=~/anaconda3/bin:"$PATH"
 
 if [ -d $CUDA_ROOT ]; then
     export PATH=${CUDA_ROOT}/bin:$PATH
