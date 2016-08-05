@@ -109,6 +109,9 @@ def install_editors():
   git_clone('https://github.com/tarjoilija/zgen.git')
   git_clone('https://github.com/gmarik/Vundle.vim.git', to='vim/bundle/vundle')
 
+  # pycharm
+  brew_install('pycharm-ce', tap='caskroom/versions')
+
   # emacs
   # if get_os() == 'mac':
   #   brew_install('emacs-mac', tap='railwaycat/homebrew-emacsmacport', options=['--with-spacemacs-icon'])

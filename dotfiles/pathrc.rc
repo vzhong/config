@@ -12,9 +12,6 @@ export LOCAL_ROOT=${HOME}/.local
 export PATH=${LOCAL_ROOT}/bin:$PATH
 export LD_LIBRARY_PATH=${VICTOR_ROOT}/lib:$LD_LIBRARY_PATH
 
-# Anaconda from install.py
-export PATH=~/anaconda3/bin:"$PATH"
-
 if [ -d $CUDA_ROOT ]; then
     export PATH=${CUDA_ROOT}/bin:$PATH
     export LD_LIBRARY_PATH=${CUDA_ROOT}/lib64:$LD_LIBRARY_PATH
@@ -45,5 +42,8 @@ fi
 export LOCAL_ROOT=${HOME}/.local
 export PATH=${LOCAL_ROOT}/bin:$PATH
 export LD_LIBRARY_PATH=${LOCAL_ROOT}/lib:$LD_LIBRARY_PATH
+
+# Anaconda from install.py
+export PATH="$HOME"/anaconda3/bin:"$PATH"
 
 export EDITOR=vim
