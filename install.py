@@ -113,10 +113,7 @@ def install_editors():
   brew_install('pycharm-ce', tap='caskroom/versions')
 
   # emacs
-  # if get_os() == 'mac':
-  #   brew_install('emacs-mac', tap='railwaycat/homebrew-emacsmacport', options=['--with-spacemacs-icon'])
-  # else:
-  #   brew_install('emacs')
+  # brew_install('emacs')
   # git_clone('https://github.com/syl20bnr/spacemacs', to='emacs.d')
   # link('emacs.d', '.emacs.d')
 
@@ -128,6 +125,10 @@ def install_os_specific():
     run('brew cask install anaconda seil java iterm2 flux spectacle')
     # disable photo app auto startup on connecting ios device
     run('defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true')
+  else:
+    logging.info('Assuming Linux operating system')
+    linux_anaconda = 'http://repo.continuum.io/archive/Anaconda3-4.1.1-Linux-x86_64.sh'
+    run('bash <(curl -s {}'.format(linux_anaconda))
 
 def source(f):
   logging.info('reloading {}'.format(f))
@@ -148,9 +149,6 @@ if __name__ == '__main__':
   # homebrew
   if not get_executable('brew'):
     install_homebrew()
-
-  # python
-  brew_install(['python', 'python3'])
 
   # shell
   brew_install(['vim', 'zsh', 'tmux', 'mosh', 'cmake'])
