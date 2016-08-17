@@ -11,15 +11,15 @@ bind ` send-prefix
 bind-key a send-prefix
 
 # enable mouse
-set-option -g mouse on
+# set-option -g mouse on
 
 # vim keys in mode
-set-option -g status-keys vi
-set-window-option -g mode-keys vi
+# set-option -g status-keys vi
+# set-window-option -g mode-keys vi
 
 # use v to begin selection
-bind-key -t vi-copy v begin-selection
-bind-key -t vi-copy y copy-selection  # "reattach-to-user-namespace pbcopy"
+# bind-key -t vi-copy v begin-selection
+# bind-key -t vi-copy y copy-selection  # "reattach-to-user-namespace pbcopy"
 
 # copy to OSX clipboard
 # bind-key y run-shell "tmux save-buffer - | reattach-to-user-namespace pbcopy"

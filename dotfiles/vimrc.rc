@@ -11,6 +11,9 @@ Bundle 'gmarik/vundle'
 filetype plugin indent on
 syntax on
 
+" Copy paste
+set clipboard+=unnamed
+
 " My Bundles
 Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Bundle 'tpope/vim-sensible'
