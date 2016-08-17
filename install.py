@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 import os
 import shutil
@@ -109,9 +109,6 @@ def install_editors():
   git_clone('https://github.com/tarjoilija/zgen.git')
   git_clone('https://github.com/gmarik/Vundle.vim.git', to='vim/bundle/vundle')
 
-  # pycharm
-  brew_install('pycharm-ce', tap='caskroom/versions')
-
   # emacs
   # brew_install('emacs')
   # git_clone('https://github.com/syl20bnr/spacemacs', to='emacs.d')
@@ -123,12 +120,18 @@ def install_editors():
 def install_os_specific():
   if get_os() == 'mac':
     run('brew cask install anaconda seil java iterm2 flux spectacle')
+    # pycharm
+    run('brew tap caskroom/versions && brew cask install pycharm-ce')
+
     # disable photo app auto startup on connecting ios device
     run('defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true')
   else:
     logging.info('Assuming Linux operating system')
-    linux_anaconda = 'http://repo.continuum.io/archive/Anaconda3-4.1.1-Linux-x86_64.sh'
-    run('bash <(curl -s {}'.format(linux_anaconda))
+    if not shutil.which('conda'):
+        linux_anaconda = 'http://repo.continuum.io/archive/Anaconda3-4.1.1-Linux-x86_64.sh'
+        run('wget {} -O anaconda.sh'.format(linux_anaconda))
+        run('bash anaconda.sh -b -p {}/anaconda'.format(os.environ.get('HOME')))
+        os.remove('anaconda.sh')
 
 def source(f):
   logging.info('reloading {}'.format(f))
