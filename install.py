@@ -125,7 +125,7 @@ def install_editors():
 
 def install_os_specific():
   if get_os() == 'mac':
-    run('brew cask install seil java iterm2 flux spectacle')
+    run('brew cask install anaconda seil java iterm2 flux spectacle')
     # disable photo app auto startup on connecting ios device
     run('defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true')
 
@@ -150,7 +150,7 @@ if __name__ == '__main__':
     install_homebrew()
 
   # python
-  brew_install('anaconda')
+  brew_install(['python', 'python3'])
 
   # shell
   brew_install(['vim', 'zsh', 'tmux', 'mosh', 'cmake'])

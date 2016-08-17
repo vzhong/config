@@ -30,11 +30,11 @@ if ! zgen saved; then
     zgen save
 fi
 
-
 source ~/.envrc
-source ~/.pathrc
-source ~/.funcrc
 
 if [ -f ~/.localrc ]; then
     source ~/.localrc
 fi
+
+source ~/.pathrc
+source ~/.funcrc

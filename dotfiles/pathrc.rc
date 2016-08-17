@@ -1,7 +1,9 @@
 #!/usr/bin/env sh
-
-export PATH=/usr/local/bin:$PATH
-LOCAL=~/local
+if [ -d $BREW_ROOT ]; then
+  export PATH=${BREW_ROOT}/bin:${BREW_ROOT}/sbin:$PATH
+  export MANPATH=${BREW_ROOT}/share/man:$MANPATH
+  export INFOPATH=${BREW_ROOT}/share/info:$INFOPATH
+fi
 
 if [ -d $LOCAL_ROOT ]; then
     export PATH=${LOCAL_ROOT}/bin:$PATH
@@ -12,18 +14,10 @@ if [ -d $CUDA_ROOT ]; then
     export LD_LIBRARY_PATH=${CUDA_ROOT}/lib64:$LD_LIBRARY_PATH
 fi
 
-if [ -d $CONDA_ROOT ]; then
-    export PATH=${CONDA_ROOT}/bin:$PATH
-fi
-
 if [ -d $TORCH_ROOT ]; then
     source ${TORCH_ROOT}/install/bin/torch-activate
 fi
 
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-
-if [ -d $BREW_ROOT ]; then
-  export PATH=${BREW_ROOT}/bin:${BREW_ROOT}/sbin:$PATH
-  export MANPATH=${BREW_ROOT}/share/man:$MANPATH
-  export INFOPATH=${BREW_ROOT}/share/info:$INFOPATH
+if [ -d $CONDA_ROOT ]; then
+    export PATH=${CONDA_ROOT}/bin:$PATH
 fi
