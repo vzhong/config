@@ -51,7 +51,7 @@ def mkdir_if_not_exist(d):
     os.makedirs(d)
 
 def get_executable(e):
-    return spawn.find_executable(e)
+    return shutil.which(e)
 
 def link(from_file, to_file, override_to_dir=''):
   from_file = os.path.join(root_dir, from_file)
@@ -64,13 +64,13 @@ def link(from_file, to_file, override_to_dir=''):
     os.makedirs(os.path.dirname(to_file))
   os.symlink(from_file, to_file)
 
-def install_homebrew():
+def prompt_homebrew():
   logging.info('installing homebrew')
   curl = {
       'linux': '"$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"',
       'mac': '"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"',
   }[get_os()]
-  run(['ruby', '-e', curl])
+  logging.critical('Please install homebrew via\n{}'.format('ruby -e ' + curl))
 
 def brew_install(brews, tap=None, options=()):
   if not isinstance(brews, list):
@@ -151,7 +151,8 @@ if __name__ == '__main__':
 
   # homebrew
   if not get_executable('brew'):
-    install_homebrew()
+    prompt_homebrew()
+    import sys; sys.exit(1)
 
   # shell
   brew_install(['vim', 'zsh', 'tmux', 'mosh', 'cmake'])

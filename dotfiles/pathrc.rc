@@ -1,23 +1,23 @@
 #!/usr/bin/env sh
-if [ -d $BREW_ROOT ]; then
+if [ -n "$BREW_ROOT" ]; then
   export PATH=${BREW_ROOT}/bin:${BREW_ROOT}/sbin:$PATH
   export MANPATH=${BREW_ROOT}/share/man:$MANPATH
   export INFOPATH=${BREW_ROOT}/share/info:$INFOPATH
 fi
 
-if [ -d $LOCAL_ROOT ]; then
+if [ -n "$LOCAL_ROOT" ]; then
     export PATH=${LOCAL_ROOT}/bin:$PATH
 fi
 
-if [ -d $CUDA_ROOT ]; then
+if [ -n "$CUDA_ROOT" ]; then
     export PATH=${CUDA_ROOT}/bin:$PATH
     export LD_LIBRARY_PATH=${CUDA_ROOT}/lib64:$LD_LIBRARY_PATH
 fi
 
-if [ -d $TORCH_ROOT ]; then
+if [ -n "$TORCH_ROOT" ]; then
     source ${TORCH_ROOT}/install/bin/torch-activate
 fi
 
-if [ -d $CONDA_ROOT ]; then
+if [ -n "$CONDA_ROOT" ]; then
     export PATH=${CONDA_ROOT}/bin:$PATH
 fi
