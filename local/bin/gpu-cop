@@ -1,0 +1,46 @@
+#!/usr/bin/env python
+import pwd
+import json
+from collections import defaultdict
+import subprocess
+
+
+def get_owner(pid):
+    UID = 1
+    for l in open('/proc/{}/status'.format(pid)):
+        if l.startswith('Uid:'):
+            uid = int(l.split()[UID])
+            return pwd.getpwuid(uid).pw_name
+
+
+def parse_nvidia_smi(log):
+    lines = log.split('\n')
+    relevant = []
+    for i, l in enumerate(lines):
+        if l.startswith('| Processes:'):
+            relevant = lines[i:]
+            break
+    assert relevant, 'Invalid nvidia-smi output:\n{}'.format(log)
+    for i, l in enumerate(relevant):
+        if l.startswith('|======='):
+            relevant = relevant[i:]
+    assert relevant, 'Invalid nvidia-smi output:\n{}'.format(log)
+    # truncate the borders
+    relevant = relevant[1:-2]
+
+    # parse user information
+    usage = defaultdict(list)
+    for line in relevant:
+        line = line.strip('| ')
+        tokens = line.split()
+        if len(tokens) == 5:
+            gpu, pid, proc_type, proc_name, mem = tokens
+            owner = get_owner(int(pid))
+            usage[owner].append({'gpu': gpu, 'pid': pid, 'type': proc_type, 'name': proc_name, 'mem': mem})
+    return usage
+
+
+if __name__ == '__main__':
+    stdout = subprocess.check_output("nvidia-smi", shell=True)
+    usage = parse_nvidia_smi(stdout.decode('utf-8'))
+    print(json.dumps(usage, indent=2))

@@ -55,6 +55,7 @@ set smartcase
 " Leader key
 let mapleader = "\<Space>"
 
+
 " Open nerdtree by default
 " autocmd vimenter * NERDTree
 " Close if only nerdtree left
@@ -62,6 +63,14 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " Map nerdtree hotkey to leader f
 nmap <leader>f :NERDTreeToggle<cr>
 
+" reload changes
+set autoread
+
+" wrap lines
+set wrap
+" navigate line wraps
+onoremap <silent> j gj
+onoremap <silent> k gk
 
 " ctrl to change panes
 nnoremap <C-J> <C-W><C-J>

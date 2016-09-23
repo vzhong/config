@@ -1,0 +1,50 @@
+#!/usr/bin/env python
+import logging
+import subprocess
+import json
+from collections import defaultdict
+from tabulate import tabulate
+
+
+MACHINES = ['gpu1', 'gpu2', 'desktop1', 'desktop2']
+
+
+def summarize_users(users):
+    summary = []
+    for user, infos in users.items():
+        n_gpus = len(set([(info['machine'], info['gpu']) for info in infos]))
+        n_jobs = len(infos)
+        mem = [int(info['mem'].rstrip('MiB')) for info in infos]
+        ave_mem = sum(mem) / len(mem)
+        summary.append([user, n_gpus, n_jobs, ave_mem])
+    return sorted(summary, key=lambda t: t[1], reverse=True), ['user', 'n_gpus_used', 'n_jobs', 'ave_mem']
+
+def summarize_gpus(machines):
+    summary = []
+    for machine, infos in machines.items():
+        n_jobs = len(infos)
+        n_gpus = len(set([info['gpu'] for info in infos]))
+        mem = [int(info['mem'].rstrip('MiB')) for info in infos]
+        ave_mem = sum(mem) / len(mem)
+        summary.append([machine, n_gpus, n_jobs, ave_mem])
+    return sorted(summary, key=lambda t: t[2], reverse=True), ['machine', 'n_gpus_used', 'n_jobs', 'ave_mem']
+
+
+if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
+    users = defaultdict(list)
+    machines = defaultdict(list)
+    for machine in MACHINES:
+        logging.info('connecting to machine {}'.format(machine))
+        stdout = subprocess.check_output("ssh {} '/home/victor/.local/bin/gpu-cop'".format(machine), shell=True)
+        usage_ = json.loads(stdout.decode('utf-8'))
+        for user, info in usage_.items():
+            for info_ in info:
+                info_['machine'] = machine
+                users[user].append(info_)
+                machines[machine].append(info_)
+
+    tab, headers = summarize_users(users)
+    print(tabulate(tab, headers=headers))
+    tab, headers = summarize_gpus(machines)
+    print(tabulate(tab, headers=headers))

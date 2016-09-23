@@ -1,9 +1,9 @@
-if [[ $- == *i* ]] 
-then
-  echo "Hello ${USER}!"
-else
-  exit 0
-fi
+# if [[ $- == *i* ]] 
+# then
+#   echo "Hello ${USER}!"
+# else
+#   exit 0
+# fi
 
 # load zgen
 source "${HOME}/config/zgen/zgen.zsh"
