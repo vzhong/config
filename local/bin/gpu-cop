@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import re
 import pwd
 import json
 from collections import defaultdict
@@ -15,32 +16,26 @@ def get_owner(pid):
 
 def parse_nvidia_smi(log):
     lines = log.split('\n')
-    relevant = []
-    for i, l in enumerate(lines):
-        if l.startswith('| Processes:'):
-            relevant = lines[i:]
-            break
-    assert relevant, 'Invalid nvidia-smi output:\n{}'.format(log)
-    for i, l in enumerate(relevant):
-        if l.startswith('|======='):
-            relevant = relevant[i:]
-    assert relevant, 'Invalid nvidia-smi output:\n{}'.format(log)
-    # truncate the borders
-    relevant = relevant[1:-2]
 
-    # parse user information
+    try:
+        split_idx = log.index("| Processes:")
+    except ValueError: # Substring not found
+        raise ValueError('Invalid nvidia-smi output:\n{}'.format(log))
+
+    gpu_log, usage_log = log[:split_idx], log[split_idx:]
+    gpus = [int(i) for i in re.findall("\n\|\s+(\d+)\s", gpu_log)]
     usage = defaultdict(list)
-    for line in relevant:
-        line = line.strip('| ')
+
+    for line in re.findall("\|\s+(\d.*?)\s\|", usage_log):
         tokens = line.split()
-        if len(tokens) == 5:
-            gpu, pid, proc_type, proc_name, mem = tokens
-            owner = get_owner(int(pid))
-            usage[owner].append({'gpu': gpu, 'pid': pid, 'type': proc_type, 'name': proc_name, 'mem': mem})
-    return usage
+        gpu, pid, proc_type, proc_name, mem = tokens
+        owner = get_owner(int(pid))
+        usage[owner].append({'gpu': gpu, 'pid': pid, 'type': proc_type, 'name': proc_name, 'mem': mem})
+
+    return usage, gpus
 
 
 if __name__ == '__main__':
     stdout = subprocess.check_output("nvidia-smi", shell=True)
-    usage = parse_nvidia_smi(stdout.decode('utf-8'))
-    print(json.dumps(usage, indent=2))
+    usage, gpus = parse_nvidia_smi(stdout.decode('utf-8'))
+    print(json.dumps({"usage": usage, "gpus": gpus}, indent=2))

@@ -29,15 +29,31 @@ def summarize_gpus(machines):
         summary.append([machine, n_gpus, n_jobs, ave_mem])
     return sorted(summary, key=lambda t: t[2], reverse=True), ['machine', 'n_gpus_used', 'n_jobs', 'ave_mem']
 
+def summarize_free_gpus(free_gpus):
+    summary = []
+    for machine, list_gpus in free_gpus.items():
+        summary.append([machine, ", ".join('gpu{}'.format(i) for i in sorted(list_gpus))])
+    return summary, ['machine', 'free GPUs']
+
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     users = defaultdict(list)
+    free_gpus = {}
     machines = defaultdict(list)
     for machine in MACHINES:
         logging.info('connecting to machine {}'.format(machine))
-        stdout = subprocess.check_output("ssh {} '/home/victor/.local/bin/gpu-cop'".format(machine), shell=True)
-        usage_ = json.loads(stdout.decode('utf-8'))
+        stdout = subprocess.check_output("ssh {} '/home/romain/bin/gpu-cop'".format(machine), shell=True)
+        result = json.loads(stdout.decode('utf-8'))
+        usage_ = result["usage"]
+        gpus = set(result["gpus"])
+        used_gpus = set()
+        for us in usage_.values():
+            for u in us:
+                used_gpus.add(int(u["gpu"]))
+        free_gpus_machine = gpus - used_gpus
+        free_gpus[machine] = free_gpus_machine
+
         for user, info in usage_.items():
             for info_ in info:
                 info_['machine'] = machine
@@ -47,4 +63,6 @@ if __name__ == '__main__':
     tab, headers = summarize_users(users)
     print(tabulate(tab, headers=headers))
     tab, headers = summarize_gpus(machines)
+    print(tabulate(tab, headers=headers))
+    tab, headers = summarize_free_gpus(free_gpus)
     print(tabulate(tab, headers=headers))
