@@ -43,7 +43,7 @@ if __name__ == '__main__':
     machines = defaultdict(list)
     for machine in MACHINES:
         logging.info('connecting to machine {}'.format(machine))
-        stdout = subprocess.check_output("ssh {} '/home/romain/bin/gpu-cop'".format(machine), shell=True)
+        stdout = subprocess.check_output("ssh {} '/home/victor/.local/bin/gpu-cop'".format(machine), shell=True)
         result = json.loads(stdout.decode('utf-8'))
         usage_ = result["usage"]
         gpus = set(result["gpus"])
