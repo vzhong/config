@@ -133,6 +133,8 @@ if __name__ == '__main__':
   link('conf/dotfiles/zsh.sh', '.config/zsh.sh')
   with open('{}/.zshrc'.format(os.environ['HOME']), 'wt') as f:
       f.write('source ~/.config/zsh.sh\n')
+  with open('{}/.zprofile'.format(os.environ['HOME']), 'wt') as f:
+      f.write('source ~/.zshrc\n')
   link('conf/dotfiles/gitconfig.yml', '.gitconfig')
   link('conf/dotfiles/gitignore', '.gitignore')
   link('conf/dotfiles/tmux.sh', '.tmux.conf')
