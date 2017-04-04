@@ -1,5 +1,5 @@
 " Enable plugged
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
 """""""""""""""""""""""""""""""
 " My settings
@@ -123,6 +123,20 @@ let g:jedi#documentation_command = "K"
 let g:jedi#usages_command = "<leader>n"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>r"
+
+
+""""""""""""""""""""""""""""""
+" NerdTree
+""""""""""""""""""""""""""""""
+Plug 'scrooloose/nerdtree'
+map <leader>f :NERDTreeToggle<CR>
+
+" open automatically if vim opens with directory
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+
+" close vim if only window left is file browser
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
 """""""""""""""""""""""""""""""

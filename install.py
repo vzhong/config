@@ -2,11 +2,10 @@
 
 import os
 import shutil
-import stat
 import logging
 import subprocess
 import sys
-from distutils import spawn
+import requests
 from time import time
 
 def get_os():
@@ -18,33 +17,53 @@ def get_os():
   else:
     raise Exception('unsupported platform {}'.format(platform))
 
-def run(cmd, verbose=True):
+def run(cmd, stdin=None, verbose=True, condition=None):
+  if condition is not None and not condition:
+    return
+
   if isinstance(cmd, str):
     cmd = cmd.split(' ')
   logging.info("{}".format(cmd))
   start = time()
   p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-  out, err = p.communicate()
+  if stdin:
+    p.stdin.write(stdin + '\n')
+    p.stdin.flush()
+
+  while p.poll() is None:
+    l = p.stdout.readline().decode().rstrip('\n')
+    if verbose:
+      print(l)
   if verbose:
-    if out.strip():
-      logging.info(out)
+    print(p.stdout.read().decode().rstrip('\n'))
     logging.info('time elapsed {}'.format(time() - start))
+  sys.stderr.write(p.stderr.read().decode())
   if p.returncode:
-    logging.critical(err)
-  else:
-    logging.warn(err)
-  return out
+    raise Exception("Command failed: {}".format(cmd + '< {}'.format(stdin) if stdin else ''))
 
 def rm_if_exists(p):
   if os.path.islink(p):
-    logging.info('unlinking {}'.format(p))
+    # logging.info('unlinking {}'.format(p))
     os.unlink(p)
   elif os.path.exists(p):
-    logging.info('removing {}'.format(p))
+    # logging.info('removing {}'.format(p))
     if os.path.isdir(p):
       shutil.rmtree(p)
     else:
       os.remove(p)
+
+def download_file(url, fname=None):
+  if fname is None:
+    local_filename = url.split('/')[-1]
+  else:
+    local_filename = fname
+  # NOTE the stream=True parameter
+  r = requests.get(url, stream=True)
+  with open(local_filename, 'wb') as f:
+    for chunk in r.iter_content(chunk_size=1024):
+      if chunk:  # filter out keep-alive new chunks
+        f.write(chunk)
+  return local_filename
 
 def mkdir_if_not_exist(d):
   if not os.path.isdir(d):
@@ -58,73 +77,18 @@ def link(from_file, to_file, override_to_dir=''):
   temp = override_to_dir if override_to_dir else home_dir
   to_file = os.path.join(temp, to_file)
   rm_if_exists(to_file)
-  logging.info('symlinking {} to {}'.format(from_file, to_file))
+  # logging.info('symlinking {} to {}'.format(from_file, to_file))
   if not os.path.isdir(os.path.dirname(to_file)):
     logging.info('making directory {}'.format(os.path.dirname(to_file)))
     os.makedirs(os.path.dirname(to_file))
   os.symlink(from_file, to_file)
 
-def prompt_homebrew():
-  logging.info('installing homebrew')
-  curl = {
-      'linux': '"$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"',
-      'mac': '"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"',
-  }[get_os()]
-  logging.critical('Please install homebrew via\n{}'.format('ruby -e ' + curl))
-
-def brew_install(brews, tap=None, options=()):
-  if not isinstance(brews, list):
-    brews = [brews]
-  logging.info('installing {} via homebrew'.format(brews))
-  if options:
-    logging.info('with options {}'.format(options))
-  if tap:
-    logging.info('tapping {}'.format(tap))
-    run(['brew', 'tap', tap])
-  run(['brew', 'install'] + brews + list(options))
-
-def git_clone(repo, to=None, recursive=True):
-  logging.info('cloning repository {}'.format(repo))
-  cmd = ['git', 'clone', repo]
-  if to:
-    cmd += [to]
-  if recursive:
-    cmd += ['--recursive']
-  try:
-    run(cmd)
-  except Exception as e:
-    if 'already exists' in e:
-      logging.critical('skipping because directory already exists')
-
-def install_os_specific():
-  # vim
-  link('vim', '.vim')
-  mkdir_if_not_exist('vim/bundle')
-  git_clone('https://github.com/tarjoilija/zgen.git')
-  git_clone('https://github.com/gmarik/Vundle.vim.git', to='vim/bundle/vundle')
-
-  if get_os() == 'mac':
-    run('brew cask install anaconda java iterm2 flux spectacle google-chrome evernote dropbox spotify')
-
-    # disable photo app auto startup on connecting ios device
-    run('defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true')
-  else:
-    logging.info('Assuming Linux operating system')
-    if not shutil.which('conda'):
-        linux_anaconda = 'http://repo.continuum.io/archive/Anaconda3-4.1.1-Linux-x86_64.sh'
-        run('wget {} -O anaconda.sh'.format(linux_anaconda))
-        run('bash anaconda.sh -b -p {}/anaconda'.format(os.environ.get('HOME')))
-        os.remove('anaconda.sh')
-
-def source(f):
-  logging.info('reloading {}'.format(f))
-  run('source {}'.format(f))
-
 
 if __name__ == '__main__':
+  op_sys = get_os()
   logging.basicConfig(level=logging.INFO)
   logging.info('Hello, {}!'.format(os.environ['USER']))
-  logging.info('Setting up your environment for {}'.format(get_os()))
+  logging.info('Setting up your environment for {}'.format(op_sys))
 
   root_dir = os.path.abspath(os.path.dirname(__file__))
   logging.info('located config directory at {}'.format(root_dir))
@@ -134,32 +98,64 @@ if __name__ == '__main__':
 
   # homebrew
   if not get_executable('brew'):
-    prompt_homebrew()
-    import sys; sys.exit(1)
+    logging.info('Installing Homebrew')
+    url = 'https://raw.githubusercontent.com/{}/install/master/install'.format('Linuxbrew' if op_sys == 'linux' else 'Homebrew')
+    fname = download_file(url)
+    run('sh ' + fname)
+    rm_if_exists(fname)
+  else:
+    logging.info('Homebrew is already installed')
 
-  # shell
-  brew_install(['vim', 'zsh', 'tmux', 'mosh', 'cmake', 'atools'])
-  # link tmux
-  link('tmux', '.tmux.d')
-  link('nvim', '.config/nvim')
+  # anaconda
+  if not get_executable('conda'):
+    logging.info('Installing Anaconda')
+    url = 'https://repo.continuum.io/archive/Anaconda3-4.3.1-{}-x86_64.sh'.format('MacOSX' if op_sys == 'mac' else 'Linux')
+    fname = download_file(url)
+    run('bash {} -b -p {}/anaconda'.format(fname, os.environ.get('HOME')))
+    rm_if_exists(fname)
+  else:
+    logging.info('Anaconda is already installed')
 
-  # link dotfiles
-  dot_files_dir = os.path.join(root_dir, 'dotfiles')
-  for f in [f for f in os.listdir(dot_files_dir) if f.endswith('.rc')]:
-    link(os.path.join('dotfiles', f), '.' + f.replace('.rc', ''))
+  run('brew install cmake', condition=not get_executable('cmake'))
+  run('brew install zsh', condition=not get_executable('zsh'))
+  run('brew install tmux', condition=not get_executable('tmux'))
+  run('brew install atools', condition=not get_executable('aunpack'))
+  run('brew install lua', condition=not get_executable('lua'))
+  for k in ['LUA_PATH', 'LUA_CPATH']:
+    if k in os.environ:
+      del os.environ[k]
+  run('brew install neovim/neovim/neovim', condition=not get_executable('nvim'))
 
-  # link global git ignore
-  link('git/gitignore', '.gitignore')
+  link('conf/tmux', '.tmux.d')
+  mkdir_if_not_exist('.config')
+  link('conf/nvim', '.config/nvim')
+  link('conf/local', '.config/local')
+  link('conf/shell', '.config/shell')
+  link('conf/dotfiles/zsh.sh', '.config/zsh.sh')
+  with open('{}/.zprofile'.format(os.environ['HOME']), 'wt') as f:
+      f.write('source ~/.config/zsh.sh\n')
+  link('conf/dotfiles/gitconfig.yml', '.gitconfig')
+  link('conf/dotfiles/gitignore', '.gitignore')
+  link('conf/dotfiles/tmux.sh', '.tmux.conf')
 
-  # link local files
-  link('local', '.local')
-  temp = os.path.join(home_dir, '.local', 'bin')
-  st = os.stat(temp)
-  os.chmod(temp, st.st_mode | stat.S_IEXEC)
+  # powerline fonts
+  powerline_dir = os.path.join('{}/.config/powerline'.format(os.environ['HOME']))
+  if not os.path.isdir(powerline_dir):
+    run('git clone https://github.com/powerline/fonts.git {}'.format(powerline_dir))
+    curr_dir = os.getcwd()
+    os.chdir(powerline_dir)
+    run('./install.sh')
+    os.chdir(curr_dir)
 
-  # os specific
-  logging.info('installing os specific packages')
-  install_os_specific()
+  # zsh package manager
+  zsh_dir = '{}/.config/zsh'.format(os.environ['HOME'])
+  run('git clone --recursive https://github.com/sorin-ionescu/prezto.git {}'.format(zsh_dir), condition=not os.path.isdir(zsh_dir))
+  for f in [x for x in os.listdir(os.path.join(zsh_dir, 'runcoms')) if x.startswith('z')]:
+    link(os.path.join(zsh_dir, 'runcom', f), '.config/zsh/.{}'.format(f))
+
+  # vim package manager
+  mkdir_if_not_exist('{}/.local/share/nvim/site/autoload'.format(os.environ['HOME']))
+  download_file('https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim', '{}/.local/share/nvim/site/autoload/plug.vim'.format(os.environ['HOME']))
 
   print('you need to change your default shell to zsh:')
   print('sudo cat "{}" >> /etc/shells'.format(get_executable('zsh')))

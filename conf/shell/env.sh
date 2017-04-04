@@ -1,7 +1,7 @@
-export EDITOR=vim
+export EDITOR=nvim
 export HOMEBREW_NO_ANALYTICS=1
 export PATH=/usr/local/bin:$PATH
-export LOCAL_ROOT=${HOME}/.local
+export LOCAL_ROOT=${HOME}/.config/local
 
 # these should be defined in ~/.localrc
 # export BREW_ROOT=

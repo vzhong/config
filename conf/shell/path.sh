@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
+export ZDORDIR=${HOME}/.config/zsh
+
 if [ -n "$BREW_ROOT" ]; then
   export PATH=${BREW_ROOT}/bin:${BREW_ROOT}/sbin:$PATH
   export MANPATH=${BREW_ROOT}/share/man:$MANPATH
