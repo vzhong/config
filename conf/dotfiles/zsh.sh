@@ -45,4 +45,4 @@ zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
 zstyle ':prezto:module:tmux:iterm' integrate 'yes'
 
 # theme
-zstyle ':prezto:module:prompt' theme 'agnoster'
+zstyle ':prezto:module:prompt' theme 'paradox'
