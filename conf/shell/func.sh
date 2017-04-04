@@ -42,3 +42,7 @@ gc() {
 gd() {
   git diff
 }
+
+gp() {
+  git push
+}
