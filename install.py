@@ -119,7 +119,6 @@ if __name__ == '__main__':
   run('brew install cmake', condition=not get_executable('cmake'))
   run('brew install zsh', condition=not get_executable('zsh'))
   run('brew install tmux', condition=not get_executable('tmux'))
-  run('brew install atools', condition=not get_executable('aunpack'))
   run('brew install lua', condition=not get_executable('lua'))
   for k in ['LUA_PATH', 'LUA_CPATH']:
     if k in os.environ:
@@ -132,7 +131,7 @@ if __name__ == '__main__':
   link('conf/local', '.config/local')
   link('conf/shell', '.config/shell')
   link('conf/dotfiles/zsh.sh', '.config/zsh.sh')
-  with open('{}/.zprofile'.format(os.environ['HOME']), 'wt') as f:
+  with open('{}/.zshrc'.format(os.environ['HOME']), 'wt') as f:
       f.write('source ~/.config/zsh.sh\n')
   link('conf/dotfiles/gitconfig.yml', '.gitconfig')
   link('conf/dotfiles/gitignore', '.gitignore')
