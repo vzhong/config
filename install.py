@@ -96,32 +96,15 @@ def git_clone(repo, to=None, recursive=True):
     if 'already exists' in e:
       logging.critical('skipping because directory already exists')
 
-def install_rvm():
-  brew_install(['gnupg', 'gnupg2'])
-  run('gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3')
-  rvm = run('curl -sSL https://get.rvm.io', verbose=False)
-  run(['bash', '-s', 'stable', '--ruby', rvm])
-
-def install_editors():
+def install_os_specific():
   # vim
   link('vim', '.vim')
   mkdir_if_not_exist('vim/bundle')
   git_clone('https://github.com/tarjoilija/zgen.git')
   git_clone('https://github.com/gmarik/Vundle.vim.git', to='vim/bundle/vundle')
 
-  # emacs
-  # brew_install('emacs')
-  # git_clone('https://github.com/syl20bnr/spacemacs', to='emacs.d')
-  # link('emacs.d', '.emacs.d')
-
-  # atom
-  # run('brew cask install atom')
-
-def install_os_specific():
   if get_os() == 'mac':
-    run('brew cask install anaconda seil java iterm2 flux spectacle')
-    # pycharm
-    run('brew tap caskroom/versions && brew cask install pycharm-ce')
+    run('brew cask install anaconda java iterm2 flux spectacle google-chrome evernote dropbox spotify')
 
     # disable photo app auto startup on connecting ios device
     run('defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true')
@@ -155,12 +138,10 @@ if __name__ == '__main__':
     import sys; sys.exit(1)
 
   # shell
-  brew_install(['vim', 'zsh', 'tmux', 'mosh', 'cmake'])
+  brew_install(['vim', 'zsh', 'tmux', 'mosh', 'cmake', 'atools'])
   # link tmux
   link('tmux', '.tmux.d')
-
-  # editors
-  install_editors()
+  link('nvim', '.config/nvim')
 
   # link dotfiles
   dot_files_dir = os.path.join(root_dir, 'dotfiles')

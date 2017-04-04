@@ -12,7 +12,9 @@ filetype plugin indent on
 syntax on
 
 " Copy paste
-set clipboard+=unnamed
+if $TMUX == ''
+  set clipboard+=unnamed
+endif
 
 " My Bundles
 Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
