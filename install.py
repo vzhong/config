@@ -117,6 +117,7 @@ if __name__ == '__main__':
     logging.info('Anaconda is already installed')
 
   run('brew install cmake', condition=not get_executable('cmake'))
+  run('brew install mosh', condition=not get_executable('mosh'))
   run('brew install zsh', condition=not get_executable('zsh'))
   run('brew install tmux', condition=not get_executable('tmux'))
   run('brew install lua', condition=not get_executable('lua'))
