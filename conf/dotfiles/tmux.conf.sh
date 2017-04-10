@@ -25,7 +25,9 @@ set-option -g allow-rename off
 
 # copy to OSX clipboard
 # bind-key y run-shell "tmux save-buffer - | reattach-to-user-namespace pbcopy"
-set-option -g default-command "reattach-to-user-namespace -l zsh"
+if-shell "uname | grep -q Darwin" 'set-option -g default-command "reattach-to-user-namespace -l zsh"' ""
+
+
 
 #####################
 ## Windows
