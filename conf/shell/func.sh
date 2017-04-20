@@ -32,17 +32,19 @@ gu() {
 }
 
 gss() {
-  git status
+  git status "$@"
 }
 
 gc() {
-  git commit
+  git commit "$@"
 }
 
 gd() {
-  git diff
+  git diff "$@"
 }
 
 gp() {
-  git push
+  git push "$@"
 }
+
+alias rm=rm

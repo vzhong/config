@@ -170,4 +170,10 @@ set -g message-attr bold
 set -g message-fg colour232
 set -g message-bg colour166
 
+
+# Add truecolor support
+set-option -ga terminal-overrides ",xterm-256color:Tc"
+# Default terminal is 256 colors
+set -g default-terminal "screen-256color"
+
 # }

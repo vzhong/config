@@ -19,22 +19,16 @@ zstyle ':prezto:load' pmodule \
   'tmux' \
   'prompt'
 
-
 if [ -f ~/.localrc ]; then
     source ~/.localrc
 fi
 
-source ~/.config/shell/path.sh
-
-if [ -f ~/.localrc ]; then
-    source ~/.localrc
-fi
-
-source ~/.config/shell/path.sh
-
+source ${HOME}/.config/shell/env.sh
+source ${HOME}/.config/shell/func.sh
+source ${HOME}/.config/shell/path.sh
 
 # load ssh identities
-zstyle ':prezto:module:ssh:load' identities 
+zstyle ':prezto:module:ssh:load' identities 'id_rsa'
 
 # auto title terminal
 zstyle ':prezto:module:terminal' auto-title 'yes'
