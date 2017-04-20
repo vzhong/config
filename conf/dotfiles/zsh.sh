@@ -46,3 +46,5 @@ zstyle ':prezto:module:tmux:iterm' integrate 'yes'
 
 # theme
 zstyle ':prezto:module:prompt' theme 'sorin'
+
+alias rm=rm
