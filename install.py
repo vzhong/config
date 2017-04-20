@@ -39,7 +39,7 @@ def run(cmd, stdin=None, verbose=True, condition=None):
     logging.info('time elapsed {}'.format(time() - start))
   sys.stderr.write(p.stderr.read().decode())
   if p.returncode:
-    raise Exception("Command failed: {}".format(cmd + '< {}'.format(stdin) if stdin else ''))
+    raise Exception("Command failed: {}".format(' '.join(cmd) + ('< {}'.format(stdin) if stdin else '')))
 
 def rm_if_exists(p):
   if os.path.islink(p):
@@ -101,7 +101,7 @@ if __name__ == '__main__':
     logging.info('Installing Homebrew')
     url = 'https://raw.githubusercontent.com/{}/install/master/install'.format('Linuxbrew' if op_sys == 'linux' else 'Homebrew')
     fname = download_file(url)
-    run('sh ' + fname)
+    run('ruby ' + fname)
     rm_if_exists(fname)
   else:
     logging.info('Homebrew is already installed')
@@ -117,6 +117,7 @@ if __name__ == '__main__':
     logging.info('Anaconda is already installed')
 
   run('brew install cmake', condition=not get_executable('cmake'))
+  run('brew install mosh', condition=not get_executable('mosh'))
   run('brew install zsh', condition=not get_executable('zsh'))
   run('brew install tmux', condition=not get_executable('tmux'))
   run('brew install lua', condition=not get_executable('lua'))
@@ -137,7 +138,7 @@ if __name__ == '__main__':
       f.write('source ~/.zshrc\n')
   link('conf/dotfiles/gitconfig.yml', '.gitconfig')
   link('conf/dotfiles/gitignore', '.gitignore')
-  link('conf/dotfiles/tmux.sh', '.tmux.conf')
+  link('conf/dotfiles/tmux.conf.sh', '.tmux.conf')
 
   # powerline fonts
   powerline_dir = os.path.join('{}/.config/powerline'.format(os.environ['HOME']))

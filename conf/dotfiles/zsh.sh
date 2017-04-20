@@ -39,4 +39,6 @@ zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
 zstyle ':prezto:module:tmux:iterm' integrate 'yes'
 
 # theme
-zstyle ':prezto:module:prompt' theme 'paradox'
+zstyle ':prezto:module:prompt' theme 'sorin'
+
+alias rm=rm
