@@ -28,7 +28,7 @@ source ${HOME}/.config/shell/func.sh
 source ${HOME}/.config/shell/path.sh
 
 # load ssh identities
-zstyle ':prezto:module:ssh:load' identities 'id_rsa'
+zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'DEV' 'victor.pem'
 
 # auto title terminal
 zstyle ':prezto:module:terminal' auto-title 'yes'
