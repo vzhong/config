@@ -176,6 +176,15 @@ Plug 'vimwiki/vimwiki'
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
 
+""""""""""""""""""""""""""""""
+" Dispatch
+""""""""""""""""""""""""""""""
+Plug 'tpope/vim-dispatch'
+autocmd FileType java let b:dispatch = 'javac %'
+autocmd FileType python let b:dispatch = 'python %'
+autocmd FileType sh let b:dispatch = 'bash %'
+nnoremap <leader>b :Dispatch<CR>
+
 call plug#end()
 
 
