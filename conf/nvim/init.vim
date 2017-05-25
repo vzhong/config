@@ -170,6 +170,23 @@ Plug 'digitaltoad/vim-pug'
 
 
 """"""""""""""""""""""""""""""
+" Webdev
+""""""""""""""""""""""""""""""
+Plug 'alvan/vim-closetag'
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml"
+" JS syntax, supports ES6
+Plug 'othree/yajs.vim', {'for': ['javascript']}
+" Better indentation
+Plug 'gavocanov/vim-js-indent', {'for': ['javascript']}
+" JS syntax for common libraries
+Plug 'othree/javascript-libraries-syntax.vim', {'for': ['javascript']}
+" Tern auto-completion engine for JS (requires node/npm)
+if executable('node')
+  Plug 'marijnh/tern_for_vim', {'do': 'npm install', 'for': ['javascript', 'coffee']}
+endif
+
+
+""""""""""""""""""""""""""""""
 " Wiki
 """"""""""""""""""""""""""""""
 Plug 'vimwiki/vimwiki'
