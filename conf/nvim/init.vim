@@ -202,6 +202,13 @@ autocmd FileType python let b:dispatch = 'python %'
 autocmd FileType sh let b:dispatch = 'bash %'
 nnoremap <leader>b :Dispatch<CR>
 
+""""""""""""""""""""""""""""""
+" Linter
+""""""""""""""""""""""""""""""
+Plug 'w0rp/ale'
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_python_flake8_options = '--ignore=E501,E121,E123,E126,E226,E24,E704,D,I'
+
 
 """"""""""""""""""""""""""""""
 " Theme
