@@ -28,10 +28,10 @@ set nowb
 
 " Indentation
 set autoindent        " Automatically indent
-set smartindent
 set smarttab
 " Set softtabs with 2 spaces
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+filetype plugin indent on
 
 " Line breaks
 " Don't wrap lines physically (auto insertion of newlines)
@@ -124,6 +124,11 @@ let g:jedi#usages_command = "<leader>n"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>r"
 
+""""""""""""""""""""""""""""""
+" Indent
+""""""""""""""""""""""""""""""
+Plug 'Vimjas/vim-python-pep8-indent'
+
 
 """"""""""""""""""""""""""""""
 " NerdTree
@@ -184,6 +189,7 @@ Plug 'othree/javascript-libraries-syntax.vim', {'for': ['javascript']}
 if executable('node')
   Plug 'marijnh/tern_for_vim', {'do': 'npm install', 'for': ['javascript', 'coffee']}
 endif
+Plug 'posva/vim-vue'
 
 
 """"""""""""""""""""""""""""""
@@ -207,7 +213,7 @@ nnoremap <leader>b :Dispatch<CR>
 """"""""""""""""""""""""""""""
 Plug 'w0rp/ale'
 let g:ale_lint_on_text_changed = 'normal'
-let g:ale_python_flake8_options = '--ignore=E501,E121,E123,E126,E226,E24,E704,D,I'
+let g:ale_python_flake8_options = '--ignore=E501,E121,E123,E126,E226,E24,E704,D,I,N'
 
 
 """"""""""""""""""""""""""""""
