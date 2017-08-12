@@ -138,7 +138,7 @@ if __name__ == '__main__':
       f.write('source ~/.zshrc\n')
   link('conf/dotfiles/gitconfig.yml', '.gitconfig')
   link('conf/dotfiles/gitignore', '.gitignore')
-  link('conf/dotfiles/tmux.conf.sh', '.tmux.conf')
+  link('conf/dotfiles/tmux.sh', '.tmux.conf')
 
   # powerline fonts
   powerline_dir = os.path.join('{}/.config/powerline'.format(os.environ['HOME']))
