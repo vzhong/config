@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 export ZDORDIR=${HOME}/.config/zsh
+if [[ -f ${HOME}/.localrc ]]; then
+  source ${HOME}/.localrc
+fi
 
 if [ -n "$BREW_ROOT" ]; then
   export PATH=${BREW_ROOT}/bin:${BREW_ROOT}/sbin:$PATH

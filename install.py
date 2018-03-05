@@ -120,11 +120,7 @@ if __name__ == '__main__':
   run('brew install mosh', condition=not get_executable('mosh'))
   run('brew install zsh', condition=not get_executable('zsh'))
   run('brew install tmux', condition=not get_executable('tmux'))
-  run('brew install lua', condition=not get_executable('lua'))
-  for k in ['LUA_PATH', 'LUA_CPATH']:
-    if k in os.environ:
-      del os.environ[k]
-  run('brew install neovim/neovim/neovim', condition=not get_executable('nvim'))
+  run('brew install neovim', condition=not get_executable('nvim'))
 
   link('conf/tmux', '.tmux.d')
   mkdir_if_not_exist('.config')

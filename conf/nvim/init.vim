@@ -219,7 +219,7 @@ let g:ale_python_flake8_options = '--ignore=E501,E121,E123,E126,E226,E24,E704,D,
 """"""""""""""""""""""""""""""
 " Theme
 """"""""""""""""""""""""""""""
-Plug 'rakr/vim-one'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
@@ -227,8 +227,7 @@ call plug#end()
 """"""""""""""""""""""""""""""
 " Apply theme
 """"""""""""""""""""""""""""""
-let g:airline_theme='one'
-set background=dark
+let g:airline_theme='onedark'
 
 " tmux color
 set t_8b=^[[48;2;%lu;%lu;%lum
