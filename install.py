@@ -116,9 +116,15 @@ if __name__ == '__main__':
   else:
     logging.info('Anaconda is already installed')
 
+  # zsh
+  download_file('https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh', fname='ohmyzsh.sh')
+  run('bash ohmyzsh.sh')
+  os.remove('ohmyzsh.sh')
+  powerlevel_dir = '{}/.oh-my-zsh/custom/themes/powerlevel9k'.format(os.environ['HOME'])
+  run('git clone https://github.com/bhilburn/powerlevel9k.git {}'.format(powerlevel_dir))
+
   run('brew install cmake', condition=not get_executable('cmake'))
   run('brew install mosh', condition=not get_executable('mosh'))
-  run('brew install zsh', condition=not get_executable('zsh'))
   run('brew install tmux', condition=not get_executable('tmux'))
   run('brew install neovim', condition=not get_executable('nvim'))
 
@@ -127,11 +133,9 @@ if __name__ == '__main__':
   link('conf/nvim', '.config/nvim')
   link('conf/local', '.config/local')
   link('conf/shell', '.config/shell')
-  link('conf/dotfiles/zsh.sh', '.config/zsh.sh')
-  with open('{}/.zshrc'.format(os.environ['HOME']), 'wt') as f:
-      f.write('source ~/.config/zsh.sh\n')
-  with open('{}/.zprofile'.format(os.environ['HOME']), 'wt') as f:
-      f.write('source ~/.zshrc\n')
+  mkdir_if_not_exist('.config/fish')
+  link('conf/dotfiles/fish.sh', '.config/fish/config.fish')
+  link('conf/dotfiles/zsh.sh', '{}/.zshrc'.format(os.environ['HOME']))
   link('conf/dotfiles/gitconfig.yml', '.gitconfig')
   link('conf/dotfiles/gitignore', '.gitignore')
   link('conf/dotfiles/tmux.sh', '.tmux.conf')
@@ -144,12 +148,6 @@ if __name__ == '__main__':
     os.chdir(powerline_dir)
     run('./install.sh')
     os.chdir(curr_dir)
-
-  # zsh package manager
-  zsh_dir = '{}/.config/zsh'.format(os.environ['HOME'])
-  run('git clone --recursive https://github.com/sorin-ionescu/prezto.git {}'.format(zsh_dir), condition=not os.path.isdir(zsh_dir))
-  for f in [x for x in os.listdir(os.path.join(zsh_dir, 'runcoms')) if x.startswith('z')]:
-    link(os.path.join(zsh_dir, 'runcom', f), '.config/zsh/.{}'.format(f))
 
   # vim package manager
   mkdir_if_not_exist('{}/.local/share/nvim/site/autoload'.format(os.environ['HOME']))
