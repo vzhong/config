@@ -121,7 +121,7 @@ if __name__ == '__main__':
   run('bash ohmyzsh.sh')
   os.remove('ohmyzsh.sh')
   powerlevel_dir = '{}/.oh-my-zsh/custom/themes/powerlevel9k'.format(os.environ['HOME'])
-  run('git clone https://github.com/bhilburn/powerlevel9k.git {}'.format(powerlevel_dir))
+  run('git clone https://github.com/bhilburn/powerlevel9k.git {}'.format(powerlevel_dir), condition=not os.path.isdir(powerlevel_dir))
 
   run('brew install cmake', condition=not get_executable('cmake'))
   run('brew install mosh', condition=not get_executable('mosh'))
