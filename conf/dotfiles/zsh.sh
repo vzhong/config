@@ -5,6 +5,8 @@ source ~/.config/shell/env.sh
 source ~/.config/shell/func.sh
 source ~/.config/shell/path.sh
 
+export ZSH_DISABLE_COMPFIX=true
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -16,7 +18,7 @@ export ZSH=$HOME/.oh-my-zsh
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="powerlevel9k/powerlevel9k"
 POWERLEVEL9K_CONTEXT_TEMPLATE="%n"
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vi_mode battery disk_usage ram time)
 POWERLEVEL9K_BATTERY_STAGES="▁▂▃▄▅▆▇█"
 POWERLEVEL9K_BATTERY_LEVEL_BACKGROUND=(88 94 100 106 70 34 28 22)
@@ -37,7 +39,7 @@ POWERLEVEL9K_BATTERY_LEVEL_BACKGROUND=(88 94 100 106 70 34 28 22)
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -76,12 +78,11 @@ plugins=(
   colored-man-pages  # coloured man pages
   colorize  # coloured cat
   extract  # unzip tool
-  history  # h for history, hsi for history grep
+  # history  # h for history, hsi for history grep
   vi-mode
   tmux
   tmuxinator
   web-search  # google
-  docker
   osx  # ofd cdf
 )
 

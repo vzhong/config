@@ -1,3 +1,7 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Don't forget you need to pip install yapf neovim pylint
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Enable plugged
 call plug#begin('~/.local/share/nvim/plugged')
 
@@ -92,38 +96,38 @@ set splitbelow
 set splitright
 
 " Tab nagivation
-nnoremap <leader>n = gt
-nnoremap <leader>p = gT
+nnoremap <leader>tn = gt
+nnoremap <leader>tp = gT
+
+" background
+set background=dark
 
 
 """""""""""""""""""""""""""""""
-" autocomplete
+" Fuzzy search
 """""""""""""""""""""""""""""""
-Plug 'roxma/nvim-completion-manager'
-" pip install neovim jedi mistune psutil setproctitle
-" don't give |ins-completion-menu| messages.  For example,
-" '-- XXX completion (YYY)', 'match 1 of 2', 'The only match',
-set shortmess+=c
-" fix enter
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-" tab select
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+" nnoremap <leader>/ :Denite file_rec buffer <Enter>
+Plug 'ctrlpvim/ctrlp.vim'
+
+
+"""""""""""""""""""""""""""""""
+" Autocomplete
+"""""""""""""""""""""""""""""""
+Plug 'Valloric/YouCompleteMe'
+nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 
 """"""""""""""""""""""""""""""
-" Jedi
+" Linter
 """"""""""""""""""""""""""""""
-Plug 'davidhalter/jedi-vim'
-let g:jedi#completions_enabled = 0
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>r"
+Plug 'w0rp/ale'
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_python_flake8_options = '--ignore=E501,E121,E123,E126,E226,E24,E704,D,I,N'
 
+ 
 """"""""""""""""""""""""""""""
 " Indent
 """"""""""""""""""""""""""""""
@@ -131,7 +135,22 @@ Plug 'Vimjas/vim-python-pep8-indent'
 
 
 """"""""""""""""""""""""""""""
-" NerdTree
+" Comment
+""""""""""""""""""""""""""""""
+Plug 'scrooloose/nerdcommenter'
+" <leader> c s -> comment
+" <leader> c u -> undo comment
+
+
+""""""""""""""""""""""""""""""
+" Undo
+""""""""""""""""""""""""""""""
+Plug 'sjl/gundo.vim'
+nnoremap <leader>u :GundoToggle<CR>
+
+
+""""""""""""""""""""""""""""""
+" File navigation
 """"""""""""""""""""""""""""""
 Plug 'scrooloose/nerdtree'
 map <leader>f :NERDTreeToggle<CR>
@@ -151,6 +170,41 @@ autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
 
 
 """""""""""""""""""""""""""""""
+" Git
+"""""""""""""""""""""""""""""""
+Plug 'tpope/vim-fugitive'
+" use the :Git command
+
+Plug 'airblade/vim-gitgutter'
+" Don't set up keys
+let g:gitgutter_map_keys = 0
+
+
+"""""""""""""""""""""""""""""""
+" Start screen
+"""""""""""""""""""""""""""""""
+Plug 'mhinz/vim-startify'
+let g:startify_bookmarks = []
+
+
+"""""""""""""""""""""""""""""""
+" Easy motion
+"""""""""""""""""""""""""""""""
+Plug 'justinmk/vim-sneak'
+" s{char}{char} to search forward, S{char}{char} to search backward
+
+
+""""""""""""""""""""""""""""""
+" Executing code
+""""""""""""""""""""""""""""""
+Plug 'tpope/vim-dispatch'
+autocmd FileType java let b:dispatch = 'javac %'
+autocmd FileType python let b:dispatch = 'python %'
+autocmd FileType sh let b:dispatch = 'bash %'
+nnoremap <leader>r :Dispatch<CR>
+
+
+"""""""""""""""""""""""""""""""
 " Airline
 """""""""""""""""""""""""""""""
 Plug 'vim-airline/vim-airline'
@@ -159,76 +213,19 @@ Plug 'vim-airline/vim-airline-themes'
 " display open buffers
 let g:airline#extensions#tabline#enabled = 1
 
-
-"""""""""""""""""""""""""""""""
-" Git 
-"""""""""""""""""""""""""""""""
-Plug 'airblade/vim-gitgutter'
-" Don't set up keys
-let g:gitgutter_map_keys = 0
-
-
-""""""""""""""""""""""""""""""
-" Syntax highlighting
-""""""""""""""""""""""""""""""
-Plug 'digitaltoad/vim-pug'
-
-
-""""""""""""""""""""""""""""""
-" Webdev
-""""""""""""""""""""""""""""""
-Plug 'alvan/vim-closetag'
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml"
-" JS syntax, supports ES6
-Plug 'othree/yajs.vim', {'for': ['javascript']}
-" Better indentation
-Plug 'gavocanov/vim-js-indent', {'for': ['javascript']}
-" JS syntax for common libraries
-Plug 'othree/javascript-libraries-syntax.vim', {'for': ['javascript']}
-" Tern auto-completion engine for JS (requires node/npm)
-if executable('node')
-  Plug 'marijnh/tern_for_vim', {'do': 'npm install', 'for': ['javascript', 'coffee']}
-endif
-Plug 'posva/vim-vue'
-
-
-""""""""""""""""""""""""""""""
-" Wiki
-""""""""""""""""""""""""""""""
-Plug 'vimwiki/vimwiki'
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
-
-
-""""""""""""""""""""""""""""""
-" Dispatch
-""""""""""""""""""""""""""""""
-Plug 'tpope/vim-dispatch'
-autocmd FileType java let b:dispatch = 'javac %'
-autocmd FileType python let b:dispatch = 'python %'
-autocmd FileType sh let b:dispatch = 'bash %'
-nnoremap <leader>b :Dispatch<CR>
-
-""""""""""""""""""""""""""""""
-" Linter
-""""""""""""""""""""""""""""""
-Plug 'w0rp/ale'
-let g:ale_lint_on_text_changed = 'normal'
-let g:ale_python_flake8_options = '--ignore=E501,E121,E123,E126,E226,E24,E704,D,I,N'
-
-
 """"""""""""""""""""""""""""""
 " Theme
 """"""""""""""""""""""""""""""
 Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
-
-
-""""""""""""""""""""""""""""""
-" Apply theme
-""""""""""""""""""""""""""""""
-let g:airline_theme='onedark'
-
+" 
+" 
+" """"""""""""""""""""""""""""""
+" " Apply theme
+" """"""""""""""""""""""""""""""
+" let g:airline_theme='onedark'
+" 
 " tmux color
 set t_8b=^[[48;2;%lu;%lu;%lum
 set t_8f=^[[38;2;%lu;%lu;%lum
