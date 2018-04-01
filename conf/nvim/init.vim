@@ -214,6 +214,8 @@ Plug 'vim-airline/vim-airline-themes'
 
 " display open buffers
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#ale#enabled = 1
+
 
 """"""""""""""""""""""""""""""
 " Theme
