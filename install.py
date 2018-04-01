@@ -26,7 +26,7 @@ def run(cmd, stdin=None, verbose=True, condition=None):
 
     if isinstance(cmd, str):
         cmd = cmd.split(' ')
-    logging.info("{}".format(cmd))
+    logging.info('{}'.format(cmd))
     start = time()
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if stdin:
@@ -42,7 +42,7 @@ def run(cmd, stdin=None, verbose=True, condition=None):
         logging.info('time elapsed {}'.format(time() - start))
     sys.stderr.write(p.stderr.read().decode())
     if p.returncode:
-        raise Exception("Command failed: {}".format(
+        raise Exception('Command failed: {}'.format(
             ' '.join(cmd) + ('< {}'.format(stdin) if stdin else '')))
 
 
@@ -162,7 +162,7 @@ if __name__ == '__main__':
 
     # vim package manager
     to_file = '{}/.local/share/nvim/site/autoload/plug.vim'.format(
-            os.environ['HOME'])
+        os.environ['HOME'])
     if not os.path.isfile(to_file):
         mkdir_if_not_exist('{}/.local/share/nvim/site/autoload'.format(
             os.environ['HOME']))
