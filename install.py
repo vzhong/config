@@ -135,9 +135,6 @@ if __name__ == '__main__':
         run('brew install fish bc')
         run('brew tap fisherman/tap')
         run('brew install fisherman')
-        run('fisher fzf')
-        run('fisher transfer')
-        run('fisher omf/bobthefish')
 
     run('brew install fzf', condition=not get_executable('fzf'))
     run('brew install grc', condition=not get_executable('grc'))
@@ -179,4 +176,4 @@ if __name__ == '__main__':
     print('finished! you can now run the following to get started')
     print(get_executable('fish'))
     print('dont forget to run the following')
-    print('pip install neovim jedi flake8 autopep isort yapf')
+    print('fish post.fish')

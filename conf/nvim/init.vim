@@ -5,6 +5,13 @@
 " Enable plugged
 call plug#begin('~/.local/share/nvim/plugged')
 
+
+" Use non-fish shell
+if &shell =~# 'fish$'
+    set shell=sh
+endif
+
+
 """""""""""""""""""""""""""""""
 " My settings
 """""""""""""""""""""""""""""""
@@ -207,6 +214,12 @@ nnoremap <leader>r :Dispatch<CR>
 
 
 """""""""""""""""""""""""""""""
+" Language packs
+"""""""""""""""""""""""""""""""
+Plug 'dag/vim-fish'
+
+
+"""""""""""""""""""""""""""""""
 " Airline
 """""""""""""""""""""""""""""""
 Plug 'vim-airline/vim-airline'
@@ -223,13 +236,13 @@ let g:airline#extensions#ale#enabled = 1
 Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
-" 
-" 
-" """"""""""""""""""""""""""""""
-" " Apply theme
-" """"""""""""""""""""""""""""""
-" let g:airline_theme='onedark'
-" 
+
+
+""""""""""""""""""""""""""""""
+" Apply theme
+""""""""""""""""""""""""""""""
+let g:airline_theme='onedark'
+
 " tmux color
 set t_8b=^[[48;2;%lu;%lu;%lum
 set t_8f=^[[38;2;%lu;%lu;%lum
