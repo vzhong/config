@@ -23,10 +23,8 @@ set-option -g allow-rename off
 # bind-key -t vi-copy v begin-selection
 # bind-key -t vi-copy y copy-selection  # "reattach-to-user-namespace pbcopy"
 
-# copy to OSX clipboard
-# bind-key y run-shell "tmux save-buffer - | reattach-to-user-namespace pbcopy"
-if-shell "uname | grep -q Darwin" 'set-option -g default-command "reattach-to-user-namespace -l zsh"' ""
-
+# use fish
+set-option -g default-shell fish
 
 
 #####################
