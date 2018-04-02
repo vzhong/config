@@ -31,6 +31,9 @@ end
 set -g theme_powerline_fonts yes
 set -g theme_color_scheme zenburn
 
+# use vim bindings
+fish_vi_key_bindings
+
 # aliases
 alias ga='git add'
 alias gaa='git add .'
