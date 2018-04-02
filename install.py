@@ -148,6 +148,7 @@ if __name__ == '__main__':
     link('conf/dotfiles/gitconfig.yml', '.gitconfig')
     link('conf/dotfiles/gitignore', '.gitignore')
     link('conf/dotfiles/tmux.sh', '.tmux.conf')
+    link('local', '.mylocal')
 
     # powerline fonts
     powerline_dir = os.path.join('{}/.config/powerline'.format(

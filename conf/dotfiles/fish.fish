@@ -10,6 +10,8 @@ end
 # set paths
 set PATH /usr/local/bin /usr/sbin $PATH
 
+set PATH "$HOME/.mylocal/bin" $PATH
+
 if test -n "$CONDA_ROOT"
   set PATH "$CONDA_ROOT/bin" $PATH
 end

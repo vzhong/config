@@ -121,10 +121,10 @@ Plug 'ctrlpvim/ctrlp.vim'
 """""""""""""""""""""""""""""""
 " Autocomplete
 """""""""""""""""""""""""""""""
-Plug 'Valloric/YouCompleteMe'
-nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+Plug 'roxma/nvim-completion-manager'
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" use tab for completion
 
 
 """"""""""""""""""""""""""""""
