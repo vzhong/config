@@ -103,8 +103,12 @@ set splitbelow
 set splitright
 
 " Tab nagivation
-nnoremap <leader>tn = gt
-nnoremap <leader>tp = gT
+nnoremap <leader>tn gt
+nnoremap <leader>tp gT
+
+" Buffer navigation
+nnoremap <leader>bn :bnext<CR>
+nnoremap <leader>bp :bprevious<CR>
 
 " background
 set background=dark
@@ -135,6 +139,7 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:ale_linters = {'python': ['flake8']}
 let g:ale_fixers = {'python': ['autopep8', 'isort', 'yapf', 'remove_trailing_lines']}
 let g:ale_python_flake8_args = '--ignore=E501,E121,E123,E126,E226,E24,E704,C,D,I,N'
+" let g:ale_javascript_eslint_options
 
  
 """"""""""""""""""""""""""""""
@@ -217,6 +222,11 @@ nnoremap <leader>r :Dispatch<CR>
 " Language packs
 """""""""""""""""""""""""""""""
 Plug 'dag/vim-fish'
+Plug 'calebeby/ncm-css'
+Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+Plug 'digitaltoad/vim-pug'
+Plug 'alvan/vim-closetag'
+Plug 'posva/vim-vue'
 
 
 """""""""""""""""""""""""""""""
