@@ -219,6 +219,35 @@ nnoremap <leader>r :Dispatch<CR>
 
 
 """""""""""""""""""""""""""""""
+" Latex
+"""""""""""""""""""""""""""""""
+Plug 'lervag/vimtex'
+let g:tex_flavor = 'tex'
+let g:vimtex_compiler_progname = 'nvr'
+let g:vimtex_complete_close_braces = 1
+let g:vimtex_view_automatic = 1
+let g:vimtex_view_method = 'skim'
+
+nnoremap <leader>lb :VimtexCompile<CR>
+nnoremap <leader>lv :VimtexView<CR>
+nnoremap <leader>lt :VimtexTocToggle<CR>
+
+augroup my_cm_setup
+  autocmd!
+  autocmd User CmSetup call cm#register_source({
+        \ 'name' : 'vimtex',
+        \ 'priority': 8,
+        \ 'scoping': 1,
+        \ 'scopes': ['tex'],
+        \ 'abbreviation': 'tex',
+        \ 'cm_refresh_patterns': g:vimtex#re#ncm,
+        \ 'cm_refresh': {'omnifunc': 'vimtex#complete#omnifunc'},
+        \ })
+augroup END
+
+
+
+"""""""""""""""""""""""""""""""
 " Language packs
 """""""""""""""""""""""""""""""
 Plug 'dag/vim-fish'
