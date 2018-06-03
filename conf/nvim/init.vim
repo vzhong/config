@@ -260,6 +260,13 @@ Plug 'posva/vim-vue'
 
 
 """""""""""""""""""""""""""""""
+" Docs
+"""""""""""""""""""""""""""""""
+Plug 'rizzatti/dash.vim'
+nnoremap <leader>d :Dash<CR>
+
+
+"""""""""""""""""""""""""""""""
 " Snippets
 """""""""""""""""""""""""""""""
 Plug 'SirVer/ultisnips'
