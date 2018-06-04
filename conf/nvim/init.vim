@@ -282,7 +282,6 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
 nnoremap <leader>ee :UltiSnipsEdit<CR> 
 let g:UltiSnipsEditSplit="vertical"
->>>>>>> 5f3872470cbe2d3ddd1d6510bb51da05a873d894
 
 
 """""""""""""""""""""""""""""""
