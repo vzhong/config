@@ -12,10 +12,6 @@ set PATH /usr/local/bin /usr/sbin $PATH
 
 set PATH "$HOME/.mylocal/bin" $PATH
 
-if test -n "$CONDA_ROOT"
-  set PATH "$CONDA_ROOT/bin" $PATH
-end
-
 if test -n "$BREW_ROOT"
   set PATH "$BREW_ROOT/bin" $PATH
   set MANPATH "$BREW_ROOT/share/man" $PATH
@@ -26,6 +22,13 @@ if test -n "$CUDA_ROOT"
   set PATH "$CUDA_ROOT/bin" $PATH
   set LD_LIBRARY_PATH "$CUDA_ROOT/lib64" $LD_LIBRARY_PATH
 end
+
+# if test -n "$CONDA_ROOT"
+#   set PATH "$CONDA_ROOT/bin" $PATH
+# end
+
+source $CONDA_ROOT/etc/fish/conf.d/conda.fish
+conda activate root
 
 # theme
 set -g theme_powerline_fonts yes

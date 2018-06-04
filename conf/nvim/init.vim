@@ -103,8 +103,12 @@ set splitbelow
 set splitright
 
 " Tab nagivation
-nnoremap <leader>tn = gt
-nnoremap <leader>tp = gT
+nnoremap <leader>tn gt
+nnoremap <leader>tp gT
+
+" Buffer navigation
+nnoremap <leader>bn :bnext<CR>
+nnoremap <leader>bp :bprevious<CR>
 
 " background
 set background=dark
@@ -135,6 +139,7 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:ale_linters = {'python': ['flake8']}
 let g:ale_fixers = {'python': ['autopep8', 'isort', 'yapf', 'remove_trailing_lines']}
 let g:ale_python_flake8_args = '--ignore=E501,E121,E123,E126,E226,E24,E704,C,D,I,N'
+" let g:ale_javascript_eslint_options
 
  
 """"""""""""""""""""""""""""""
@@ -155,6 +160,7 @@ Plug 'scrooloose/nerdcommenter'
 " Undo
 """"""""""""""""""""""""""""""
 Plug 'sjl/gundo.vim'
+let g:gundo_prefer_python3 = 1
 nnoremap <leader>u :GundoToggle<CR>
 
 
@@ -214,12 +220,69 @@ nnoremap <leader>r :Dispatch<CR>
 
 
 """""""""""""""""""""""""""""""
+" Latex
+"""""""""""""""""""""""""""""""
+Plug 'lervag/vimtex'
+let g:tex_flavor = 'tex'
+let g:vimtex_compiler_progname = 'nvr'
+let g:vimtex_complete_close_braces = 1
+let g:vimtex_view_automatic = 1
+let g:vimtex_view_method = 'skim'
+
+nnoremap <leader>lb :VimtexCompile<CR>
+nnoremap <leader>lv :VimtexView<CR>
+nnoremap <leader>lt :VimtexTocToggle<CR>
+
+augroup my_cm_setup
+  autocmd!
+  autocmd User CmSetup call cm#register_source({
+        \ 'name' : 'vimtex',
+        \ 'priority': 8,
+        \ 'scoping': 1,
+        \ 'scopes': ['tex'],
+        \ 'abbreviation': 'tex',
+        \ 'cm_refresh_patterns': g:vimtex#re#ncm,
+        \ 'cm_refresh': {'omnifunc': 'vimtex#complete#omnifunc'},
+        \ })
+augroup END
+
+
+
+"""""""""""""""""""""""""""""""
 " Language packs
 """""""""""""""""""""""""""""""
 Plug 'dag/vim-fish'
-Plug 'posva/vim-vue'
 Plug 'jiangmiao/auto-pairs'
+Plug 'calebeby/ncm-css'
+Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 Plug 'digitaltoad/vim-pug'
+Plug 'alvan/vim-closetag'
+Plug 'posva/vim-vue'
+
+
+"""""""""""""""""""""""""""""""
+" Docs
+"""""""""""""""""""""""""""""""
+Plug 'rizzatti/dash.vim'
+nnoremap <leader>d :Dash<CR>
+
+
+"""""""""""""""""""""""""""""""
+" Snippets
+"""""""""""""""""""""""""""""""
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+let g:UltiSnipsSnippetsDir=$HOME."/config/snippets"
+let g:UltiSnipsSnippetDirectories=[$HOME.'/config/snippets']
+let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
+let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
+let g:UltiSnipsRemoveSelectModeMappings = 0
+" optional
+inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
+nnoremap <leader>ee :UltiSnipsEdit<CR> 
+let g:UltiSnipsEditSplit="vertical"
+>>>>>>> 5f3872470cbe2d3ddd1d6510bb51da05a873d894
 
 
 """""""""""""""""""""""""""""""
