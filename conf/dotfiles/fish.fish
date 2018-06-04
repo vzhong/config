@@ -23,9 +23,12 @@ if test -n "$CUDA_ROOT"
   set LD_LIBRARY_PATH "$CUDA_ROOT/lib64" $LD_LIBRARY_PATH
 end
 
-if test -n "$CONDA_ROOT"
-  set PATH "$CONDA_ROOT/bin" $PATH
-end
+# if test -n "$CONDA_ROOT"
+#   set PATH "$CONDA_ROOT/bin" $PATH
+# end
+
+source $CONDA_ROOT/etc/fish/conf.d/conda.fish
+conda activate root
 
 # theme
 set -g theme_powerline_fonts yes
