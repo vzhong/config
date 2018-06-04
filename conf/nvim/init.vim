@@ -217,6 +217,9 @@ nnoremap <leader>r :Dispatch<CR>
 " Language packs
 """""""""""""""""""""""""""""""
 Plug 'dag/vim-fish'
+Plug 'posva/vim-vue'
+Plug 'jiangmiao/auto-pairs'
+Plug 'digitaltoad/vim-pug'
 
 
 """""""""""""""""""""""""""""""
