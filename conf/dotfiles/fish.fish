@@ -8,24 +8,38 @@ if test -e ~/.local.fish
 end
 
 # set paths
-set PATH /usr/local/bin /usr/sbin $PATH
+if not contains /usr/local/bin $PATH
+  set PATH /usr/local/bin $PATH
+end
 
-set PATH "$HOME/.mylocal/bin" $PATH
+if not contains /usr/sbin $PATH
+  set PATH /usr/sbin $PATH
+end
+
+if not contains "$HOME/.mylocal/bin" $PATH
+  set PATH "$HOME/.mylocal/bin" $PATH
+end
 
 if test -n "$BREW_ROOT"
-  set PATH "$BREW_ROOT/bin" $PATH
-  set MANPATH "$BREW_ROOT/share/man" $PATH
-  set INFOPATH "$BREW_ROOT/share/info" $PATH
+  if not contains "$BREW_ROOT/bin" $PATH
+    set PATH "$BREW_ROOT/bin" $PATH
+  end
+  if not contains "$BREW_ROOT/share/man" $MANPATH
+    set MANPATH "$BREW_ROOT/share/man" $MANPATH
+  end
+  if not contains "$BREW_ROOT/share/info" $INFOPATH
+    set INFOPATH "$BREW_ROOT/share/info" $INFOPATH
+  end
 end
 
 if test -n "$CUDA_ROOT"
-  set PATH "$CUDA_ROOT/bin" $PATH
-  set LD_LIBRARY_PATH "$CUDA_ROOT/lib64" $LD_LIBRARY_PATH
+  if not contains "$CUDA_ROOT/bin" $PATH
+    set PATH "$CUDA_ROOT/bin" $PATH
+  end
+  if not contains "$CUDA_ROOT/lib64" $LD_LIBRARY_PATH
+    set LD_LIBRARY_PATH "$CUDA_ROOT/lib64" $LD_LIBRARY_PATH
+  end
 end
-
-# if test -n "$CONDA_ROOT"
-#   set PATH "$CONDA_ROOT/bin" $PATH
-# end
 
 source $CONDA_ROOT/etc/fish/conf.d/conda.fish
 conda activate root
