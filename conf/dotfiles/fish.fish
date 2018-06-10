@@ -41,8 +41,10 @@ if test -n "$CUDA_ROOT"
   end
 end
 
-source $CONDA_ROOT/etc/fish/conf.d/conda.fish
-conda activate root
+if test -n "$CONDA_ROOT"
+  source $CONDA_ROOT/etc/fish/conf.d/conda.fish
+  conda activate root
+end
 
 # theme
 set -g theme_powerline_fonts yes

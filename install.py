@@ -122,7 +122,7 @@ if __name__ == '__main__':
     # anaconda
     if not get_executable('conda'):
         logging.info('Installing Anaconda')
-        url = 'https://repo.continuum.io/archive/Anaconda3-4.3.1-{}-x86_64.sh'.format(
+        url = 'https://repo.continuum.io/archive/Anaconda3-5.2.0-{}-x86_64.sh'.format(
             'MacOSX' if op_sys == 'mac' else 'Linux')
         fname = download_file(url)
         run('bash {} -b -p {}/anaconda'.format(fname, os.environ.get('HOME')))
@@ -174,7 +174,7 @@ if __name__ == '__main__':
             to_file)
 
     print('you need to change your default shell to fish:')
-    print('sudo cat "{}" >> /etc/shells'.format(get_executable('fish')))
+    print('sudo echo "{}" >> /etc/shells'.format(get_executable('fish')))
     print('chsh -s {}'.format(get_executable('fish')))
     print('finished! you can now run the following to get started')
     print(get_executable('fish'))
