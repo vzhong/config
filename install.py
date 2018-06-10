@@ -131,7 +131,6 @@ if __name__ == '__main__':
         logging.info('Anaconda is already installed')
 
     # fish
-    run('brew install gcc', condition=not get_executable('gcc'))
     if not get_executable('fish'):
         run('brew install fish bc')
         run('brew tap fisherman/tap')
