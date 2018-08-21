@@ -136,7 +136,7 @@ if __name__ == '__main__':
         run('brew tap fisherman/tap')
         run('brew install fisherman')
 
-    run('brew install npm', condition=not get_executable('npm'))
+    # run('brew install npm', condition=not get_executable('npm'))
     run('brew install fzf', condition=not get_executable('fzf'))
     run('brew install grc', condition=not get_executable('grc'))
     run('brew install tmux', condition=not get_executable('tmux'))

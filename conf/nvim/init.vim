@@ -138,7 +138,7 @@ Plug 'w0rp/ale'
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_linters = {'python': ['flake8']}
 let g:ale_fixers = {'python': ['autopep8', 'isort', 'yapf', 'remove_trailing_lines']}
-let g:ale_python_flake8_args = '--ignore=E501,E121,E123,E126,E226,E24,E704,C,D,I,N'
+let g:ale_python_flake8_options = '--ignore=E501,E121,E123,E126,E226,E24,E704,C,D,I,N'
 " let g:ale_javascript_eslint_options
 
  
