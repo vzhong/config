@@ -132,9 +132,8 @@ if __name__ == '__main__':
 
     # fish
     if not get_executable('fish'):
-        run('brew install fish bc')
-        run('brew tap fisherman/tap')
-        run('brew install fisherman')
+        run('brew install fish bc curl')
+        run('curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish')
 
     # run('brew install npm', condition=not get_executable('npm'))
     run('brew install fzf', condition=not get_executable('fzf'))
