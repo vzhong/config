@@ -2,18 +2,11 @@
 set -U EDITOR vim
 set -U HOMEBREW_NO_ANALYTICS 1
 
+set -gx PATH $HOME/bin /usr/local/bin /usr/bin /usr/sbin /bin /sbin
+
 # source user specifications, if any
 if test -e ~/.local.fish
   source ~/.local.fish
-end
-
-# set paths
-if not contains /usr/local/bin $PATH
-  set PATH /usr/local/bin $PATH
-end
-
-if not contains /usr/sbin $PATH
-  set PATH /usr/sbin $PATH
 end
 
 if not contains "$HOME/.mylocal/bin" $PATH

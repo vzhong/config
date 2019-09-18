@@ -127,6 +127,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 """""""""""""""""""""""""""""""
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
+Plug 'Shougo/neco-syntax'
 " enable for all buffers
 autocmd BufEnter * call ncm2#enable_for_buffer()
 " IMPORTANT: :help Ncm2PopupOpen for more information
