@@ -16,6 +16,8 @@ endif
 " My settings
 """""""""""""""""""""""""""""""
 let mapleader = "\<Space>"      "space as leader
+" let g:python3_host_prog='python3'
+let g:loaded_python_provider = 1
 
 set history=1000                    " Store :cmdline history.
 set showcmd                         " Show incomplete commands at the bottom
