@@ -262,11 +262,11 @@ nnoremap <leader>r :Dispatch<CR>
 " Latex
 """""""""""""""""""""""""""""""
 Plug 'lervag/vimtex'
-let g:tex_flavor = 'tex'
+let g:tex_flavor = 'latex'
+let g:vimtex_view_method = 'skim'
 let g:vimtex_compiler_progname = 'nvr'
 let g:vimtex_complete_close_braces = 1
 let g:vimtex_view_automatic = 1
-let g:vimtex_view_method = 'skim'
 
 nnoremap <leader>lb :VimtexCompile<CR>
 nnoremap <leader>lv :VimtexView<CR>
@@ -274,17 +274,61 @@ nnoremap <leader>lt :VimtexTocToggle<CR>
 
 augroup my_cm_setup
   autocmd!
-  autocmd User CmSetup call cm#register_source({
-        \ 'name' : 'vimtex',
-        \ 'priority': 8,
-        \ 'scoping': 1,
-        \ 'scopes': ['tex'],
-        \ 'abbreviation': 'tex',
-        \ 'cm_refresh_patterns': g:vimtex#re#ncm,
-        \ 'cm_refresh': {'omnifunc': 'vimtex#complete#omnifunc'},
-        \ })
+  autocmd BufEnter * call ncm2#enable_for_buffer()
+  autocmd Filetype tex call ncm2#register_source({
+          \ 'name' : 'vimtex-cmds',
+          \ 'priority': 8,
+          \ 'complete_length': -1,
+          \ 'scope': ['tex'],
+          \ 'matcher': {'name': 'prefix', 'key': 'word'},
+          \ 'word_pattern': '\w+',
+          \ 'complete_pattern': g:vimtex#re#ncm2#cmds,
+          \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+          \ })
+  autocmd Filetype tex call ncm2#register_source({
+          \ 'name' : 'vimtex-labels',
+          \ 'priority': 8,
+          \ 'complete_length': -1,
+          \ 'scope': ['tex'],
+          \ 'matcher': {'name': 'combine',
+          \             'matchers': [
+          \               {'name': 'substr', 'key': 'word'},
+          \               {'name': 'substr', 'key': 'menu'},
+          \             ]},
+          \ 'word_pattern': '\w+',
+          \ 'complete_pattern': g:vimtex#re#ncm2#labels,
+          \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+          \ })
+  autocmd Filetype tex call ncm2#register_source({
+          \ 'name' : 'vimtex-files',
+          \ 'priority': 8,
+          \ 'complete_length': -1,
+          \ 'scope': ['tex'],
+          \ 'matcher': {'name': 'combine',
+          \             'matchers': [
+          \               {'name': 'abbrfuzzy', 'key': 'word'},
+          \               {'name': 'abbrfuzzy', 'key': 'abbr'},
+          \             ]},
+          \ 'word_pattern': '\w+',
+          \ 'complete_pattern': g:vimtex#re#ncm2#files,
+          \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+          \ })
+  autocmd Filetype tex call ncm2#register_source({
+          \ 'name' : 'bibtex',
+          \ 'priority': 8,
+          \ 'complete_length': -1,
+          \ 'scope': ['tex'],
+          \ 'matcher': {'name': 'combine',
+          \             'matchers': [
+          \               {'name': 'prefix', 'key': 'word'},
+          \               {'name': 'abbrfuzzy', 'key': 'abbr'},
+          \               {'name': 'abbrfuzzy', 'key': 'menu'},
+          \             ]},
+          \ 'word_pattern': '\w+',
+          \ 'complete_pattern': g:vimtex#re#ncm2#bibtex,
+          \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+          \ })
 augroup END
-
 
 
 """""""""""""""""""""""""""""""

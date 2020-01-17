@@ -40,8 +40,8 @@ bind l select-pane -R
 bind k select-pane -U
 bind j select-pane -D
 
-bind \ split-window -h
-bind - split-window -v
+bind-key \\ split-window -h -c '#{pane_current_path}' # Split panes vertically
+bind-key - split-window -v -c '#{pane_current_path}' # Split panes vertically
 
 bind-key    -T prefix w                confirm-before -p "kill-window #W? (y/n)" kill-window
 bind-key    -T prefix x                confirm-before -p "kill-pane #W? (y/n)" kill-pane
