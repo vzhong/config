@@ -140,7 +140,6 @@ Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-syntax'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-jedi'
-Plug 'ncm2/ncm2-ultisnips'
 Plug 'ncm2/ncm2-match-highlight'
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
