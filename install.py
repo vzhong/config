@@ -109,13 +109,10 @@ if __name__ == '__main__':
     # homebrew
     if not get_executable('brew'):
         logging.info('Installing Homebrew')
-        url = 'https://raw.githubusercontent.com/{}/install/master/install'.format(
-            'Linuxbrew' if op_sys == 'linux' else 'Homebrew')
+        url = 'https://raw.githubusercontent.com/Homebrew/install/master/install.sh'
         fname = download_file(url)
-        run('ruby ' + fname)
+        run('bash ' + fname)
         rm_if_exists(fname)
-        run('brew install openssl')
-        run('brew postinstall openssl')
     else:
         logging.info('Homebrew is already installed')
 
@@ -133,7 +130,7 @@ if __name__ == '__main__':
     # fish
     if not get_executable('fish'):
         run('brew install fish bc curl')
-        run('curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish')
+    run('curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish')
 
     # run('brew install npm', condition=not get_executable('npm'))
     run('brew install fzf', condition=not get_executable('fzf'))
