@@ -1,9 +1,19 @@
-# Config
+First, install dependencies
+```
+pip install -r requirements.txt
+```
 
-### Installation
+Install on remote computer:
+```
+ansible-playbook -i hosts playbooks/dev.yml
+```
 
-``` bash
-git clone --recursive git@github.com:vzhong/config ~/config
-cd ~/config
-./install.py
+Install on same computer:
+```
+ansible-playbook --connection=local -i 127.0.0.1, playbooks/dev.yml
+```
+
+Additionally for ML servers:
+```
+ansible-playbook -i hosts playbooks/ml.yml
 ```

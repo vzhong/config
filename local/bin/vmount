@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-
-set -x
-set -e
-
-echo "Attching $1"
-sshfs $1: $HOME/mnt/$1 -ovolname=$1

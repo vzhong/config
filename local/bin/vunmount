@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-
-set -x
-set -e
-
-echo unmounting $1
-umount $HOME/mnt/$1

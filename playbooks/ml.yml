@@ -1,0 +1,7 @@
+---
+- name: Machine Learning
+  hosts: all
+  tasks:
+    - import_tasks: tasks/os.yml
+    - name: install pytorch
+      shell: "{{ conda_bin }}/conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia"

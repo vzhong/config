@@ -1,0 +1,16 @@
+---
+- name: Set fact for Debian
+  set_fact:
+    brew_root: /home/linuxbrew/.linuxbrew
+  when: ansible_os_family == "Debian"
+- name: Set fact for Mac
+  set_fact:
+    brew_root: /opt/homebrew
+  when: ansible_os_family == "Darwin"
+- name: Set conda
+  set_fact:
+    conda_root: $HOME/conda
+- name: Set bins
+  set_fact:
+    brew_bin: "{{ brew_root }}/bin"
+    conda_bin: "{{ conda_root }}/bin"

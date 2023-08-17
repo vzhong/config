@@ -1,0 +1,21 @@
+---
+- name: Machine Learning
+  hosts: all
+  tasks:
+    - import_tasks: tasks/os.yml
+    - name: install brew
+      shell: NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      args:  
+        creates: "{{ brew_bin }}"
+    - name: install gcc
+      shell: "{{ brew_bin }}/brew install gcc"
+      args:
+        creates: "{{ brew_root }}/Cellar/gcc"
+    - name: install mamba
+      shell: |
+        curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
+        bash Mambaforge-$(uname)-$(uname -m).sh -b -p "{{ conda_root }}"
+        rm Mambaforge-$(uname)-$(uname -m).sh
+      args:  
+        creates: "{{ conda_root }}"
+    - import_tasks: tasks/shell.yml

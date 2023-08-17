@@ -1,0 +1,120 @@
+- name: Set fact for Fish
+  set_fact:
+    fish_local: $HOME/.local.fish
+
+- name: install fish
+  shell: "{{ brew_bin }}/brew install fish"
+  args:
+    creates: "{{ brew_bin }}/fish"
+- name: install tmux
+  shell: "{{ brew_bin }}/brew install tmux"
+  args:
+    creates: "{{ brew_bin }}/tmux"
+- name: install neovim
+  shell: "{{ brew_bin }}/brew install neovim"
+  args:
+    creates: "{{ brew_bin }}/nvim"
+- name: install mosh
+  shell: "{{ brew_bin }}/brew install mosh"
+  args:
+    creates: "{{ brew_bin }}/mosh"
+- name: copy config
+  copy:
+    src: conf
+    dest: "${HOME}"
+
+- name: creates fish directory
+  file:
+    path: ${HOME}/.config/fish
+    state: directory
+
+- name: link fish config
+  file:
+   src: "${HOME}/conf/config.fish"
+   dest: "${HOME}/.config/fish/config.fish"
+   state: link
+
+- name: creates local config
+  copy:
+    content: ""
+    dest: "{{ fish_local }}"
+    force: false
+
+- name: check for BREW config
+  lineinfile:
+    state: absent
+    path: "{{ fish_local }}"
+    regexp: "BREW_ROOT"
+  check_mode: true
+  changed_when: false
+  register: check
+- name: add BREW_ROOT to local config
+  lineinfile:
+    dest: "{{ fish_local }}"
+    line: "set -gx BREW_ROOT {{ brew_root }}"
+  when: check.found == 0
+
+- name: check for CONDA config
+  lineinfile:
+    state: absent
+    path: "{{ fish_local }}"
+    regexp: "CONDA_ROOT"
+  check_mode: true
+  changed_when: false
+  register: check
+- name: add CONDA_ROOT to local config
+  lineinfile:
+    dest: "{{ fish_local }}"
+    line: "set -gx CONDA_ROOT {{ conda_root }}"
+  when: check.found == 0
+
+- name: fish python
+  pip:
+    executable: "{{ conda_root }}/bin/pip"
+    name:
+      - powerline-status
+
+- name: creates nvim directory
+  file:
+    path: ${HOME}/.config/nvim
+    state: directory
+
+- name: link nvim config
+  file:
+    src: "${HOME}/conf/init.vim"
+    dest: "${HOME}/.config/nvim/init.vim"
+    state: link
+
+- name: vimplug
+  shell: |
+    sh -c 'curl -fLo "${HOME}/.local/share"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    nvim +'PlugInstall --sync' +qa
+  args:
+    creates: "${HOME}/.local/share/nvim/site/autoload/plug.vim"
+
+- name: neovim python
+  pip:
+    executable: "{{ conda_root }}/bin/pip"
+    name:
+      - pynvim
+      - jedi
+      - setproctitle
+      - flake8
+      - autopep8
+
+- name: link git config
+  file:
+    src: "${HOME}/conf/gitconfig.ini"
+    dest: "${HOME}/.gitconfig"
+    state: link
+- name: link gitignore
+  file:
+    src: "${HOME}/conf/gitignore"
+    dest: "${HOME}/.gitignore"
+    state: link
+
+- name: link tmux
+  file:
+    src: "${HOME}/conf/tmux.conf"
+    dest: "${HOME}/.tmux.conf"
+    state: link
