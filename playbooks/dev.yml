@@ -18,8 +18,4 @@
         rm Mambaforge-$(uname)-$(uname -m).sh
       args:  
         creates: "{{ conda_root }}"
-    - name: install git lfs
-      shell: |
-        "{{ brew_bin }}/brew install git-lfs"
-        git lfs install
     - import_tasks: tasks/shell.yml
