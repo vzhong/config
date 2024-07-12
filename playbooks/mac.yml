@@ -9,6 +9,10 @@
       shell: "{{ brew_bin }}/brew install --cask raycast"
     - name: install notion
       shell: "{{ brew_bin }}/brew install --cask notion"
+    - name: install eaglefiler
+      shell: "{{ brew_bin }}/brew install --cask eaglefiler"
+    - name: install hookmark
+      shell: "{{ brew_bin }}/brew install --cask hookmark"
     - name: install mas
       shell: "{{ brew_bin }}/brew install mas"
     - name: install bitwarden
