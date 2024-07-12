@@ -1,0 +1,23 @@
+---
+- name: MacOS
+  hosts: all
+  tasks:
+    - import_tasks: tasks/os.yml
+    - name: install arc
+      shell: "{{ brew_bin }}/brew install --cask arc"
+    - name: install raycast 
+      shell: "{{ brew_bin }}/brew install --cask raycast"
+    - name: install notion
+      shell: "{{ brew_bin }}/brew install --cask notion"
+    - name: install mas
+      shell: "{{ brew_bin }}/brew install mas"
+    - name: install bitwarden
+      shell: "{{ brew_bin }}/mas lucky bitwarden"
+    - name: install noteplan
+      shell: "{{ brew_bin }}/mas lucky noteplan"
+    - name: install hotkey
+      shell: "{{ brew_bin }}/mas lucky hotkey"
+    - name: install slack
+      shell: "{{ brew_bin }}/mas lucky slack"
+    - name: install tailscale
+      shell: "{{ brew_bin }}/mas lucky tailscale"
