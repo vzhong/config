@@ -3,8 +3,8 @@
   hosts: all
   tasks:
     - import_tasks: tasks/os.yml
-    - name: install arc
-      shell: "{{ brew_bin }}/brew install --cask arc"
+    - name: install browser
+      shell: "{{ brew_bin }}/brew install --cask zen-browser"
     - name: install raycast 
       shell: "{{ brew_bin }}/brew install --cask raycast"
     - name: install notion
