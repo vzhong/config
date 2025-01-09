@@ -3,6 +3,8 @@
   hosts: all
   tasks:
     - import_tasks: tasks/os.yml
+    - name: install menubar manager
+      shell: "{{ brew_bin }}/brew install jordanbaird-ice"
     - name: install browser
       shell: "{{ brew_bin }}/brew install --cask zen-browser"
     - name: install raycast 
