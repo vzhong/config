@@ -340,30 +340,7 @@ Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 Plug 'digitaltoad/vim-pug'
 Plug 'alvan/vim-closetag'
 Plug 'posva/vim-vue'
-
-
-"""""""""""""""""""""""""""""""
-" Docs
-"""""""""""""""""""""""""""""""
-Plug 'rizzatti/dash.vim'
-nnoremap <leader>d :Dash<CR>
-
-
-"""""""""""""""""""""""""""""""
-" Snippets
-"""""""""""""""""""""""""""""""
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-let g:UltiSnipsSnippetsDir=$HOME."/config/snippets"
-let g:UltiSnipsSnippetDirectories=[$HOME.'/config/snippets']
-let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
-let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
-let g:UltiSnipsRemoveSelectModeMappings = 0
-" optional
-inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
-nnoremap <leader>ee :UltiSnipsEdit<CR> 
-let g:UltiSnipsEditSplit="vertical"
+Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 
 
 """""""""""""""""""""""""""""""
@@ -393,3 +370,5 @@ let g:airline_theme='onedark'
 " tmux color
 set t_8b=^[[48;2;%lu;%lu;%lum
 set t_8f=^[[38;2;%lu;%lu;%lum
+
+lua require('init')
